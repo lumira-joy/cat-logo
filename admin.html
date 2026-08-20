@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Lumira</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+    <header class="admin-header">
+        <div class="admin-logo">
+            <img src="images/logo.png" alt="Lumira">
+            <div>
+                <strong>Lumira</strong>
+                <span>Administración</span>
+            </div>
+        </div>
+
+        <button class="boton-cerrar" type="button" id="boton-cerrar">
+            Cerrar sesión
+        </button>
+    </header>
+
+    <!-- =========================================================
+         CONTENIDO
+    ========================================================== -->
+    <main class="admin-contenido">
+
+        <div class="admin-titulo">
+            <div>
+                <h1>Panel de administración</h1>
+                <p>Gestioná tus productos, precios y stock.</p>
+            </div>
+
+            <div class="admin-acciones-top">
+                <button class="boton-descuento" type="button" id="boton-abrir-descuento">
+                    % Descuento por Tipo
+                </button>
+                <button class="boton-agregar" type="button" id="boton-agregar">
+                    + Agregar producto
+                </button>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             ESTADÍSTICAS
+        ====================================================== -->
+        <section class="estadisticas">
+            <div class="estadistica">
+                <span class="estadistica-titulo">Productos</span>
+                <strong id="stat-total">0</strong>
+            </div>
+
+            <div class="estadistica">
+                <span class="estadistica-titulo">Sin stock</span>
+                <strong id="stat-sin-stock">0</strong>
+            </div>
+
+            <div class="estadistica">
+                <span class="estadistica-titulo">Categorías / Materiales</span>
+                <strong id="stat-categorias">0</strong>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             PRODUCTOS
+        ====================================================== -->
+        <section class="productos-admin">
+
+            <div class="productos-header">
+                <div>
+                    <h2>Productos</h2>
+                    <p>Administrá los productos de tu catálogo.</p>
+                </div>
+
+                <input
+                    type="search"
+                    class="buscador"
+                    id="buscador"
+                    placeholder="Buscar por nombre, material o tipo..."
+                >
+            </div>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Material</th>
+                            <th>Tipo</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-productos">
+                        <tr>
+                            <td colspan="6" style="text-align:center; padding:30px; color:#777;">
+                                Cargando productos...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- =========================================================
+         MODAL AGREGAR / EDITAR PRODUCTO
+    ========================================================== -->
+    <div class="modal-fondo" id="modal-fondo">
+        <div class="modal">
+
+            <div class="modal-header">
+                <div>
+                    <h2 id="modal-titulo">Agregar producto</h2>
+                    <p id="modal-subtitulo">Completá los datos del nuevo producto.</p>
+                </div>
+                <button type="button" class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar">×</button>
+            </div>
+
+            <form id="form-producto">
+                <!-- ID OCULTO PARA SABER SI EDITAMOS O CREAMOS -->
+                <input type="hidden" id="producto-id" value="">
+                <input type="hidden" id="imagen-actual" value="">
+
+                <!-- NOMBRE -->
+                <div class="campo">
+                    <label for="nombre">Nombre</label>
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="Ej: Aro Estrella"
+                        required
+                    >
+                </div>
+
+                <!-- PRECIO + DESCUENTO -->
+                <div class="fila-campos">
+                    <div class="campo">
+                        <label for="precio">Precio ($)</label>
+                        <input
+                            type="number"
+                            id="precio"
+                            min="0"
+                            step="0.01"
+                            placeholder="Ej: 15000"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="descuento">Descuento (%)</label>
+                        <input
+                            type="number"
+                            id="descuento"
+                            min="0"
+                            max="100"
+                            step="1"
+                            value="0"
+                            placeholder="0"
+                        >
+                    </div>
+                </div>
+
+                <!-- MATERIAL + TIPO -->
+                <div class="fila-campos">
+                    <div class="campo">
+                        <label for="categoria">Material</label>
+                        <select id="categoria" required>
+                            <option value="">Seleccionar material</option>
+                            <option value="acero-blanco">Acero Blanco</option>
+                            <option value="acero-dorado">Acero Dorado</option>
+                            <option value="acero-quirurgico">Acero Quirúrgico</option>
+                            <option value="plata">Plata</option>
+                            <option value="laminado-plata">Laminado en Plata</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" required>
+                            <option value="">Seleccionar tipo</option>
+                            <option value="aros">Aros</option>
+                            <option value="abridores">Abridores</option>
+                            <option value="pulseras">Pulseras</option>
+                            <option value="anillos">Anillos</option>
+                            <option value="collares">Collares</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- STOCK -->
+                <div class="campo">
+                    <label for="cantidad_disponible">Stock disponible</label>
+                    <input
+                        type="number"
+                        id="cantidad_disponible"
+                        min="0"
+                        step="1"
+                        value="1"
+                        required
+                    >
+                </div>
+
+                <!-- DESCRIPCIÓN -->
+                <div class="campo">
+                    <label for="descripcion">Descripción</label>
+                    <textarea
+                        id="descripcion"
+                        rows="3"
+                        placeholder="Escribí una descripción del producto..."
+                    ></textarea>
+                </div>
+
+                <!-- IMÁGENES (MÚLTIPLES) -->
+                <div class="campo">
+                    <label for="imagen">Imágenes del producto (Podés elegir varias)</label>
+                    <input
+                        type="file"
+                        id="imagen"
+                        accept="image/*"
+                        multiple
+                    >
+                    <small id="texto-ayuda-imagen">Mantené presionado Ctrl o Shift para elegir más de una foto. La 1ra será la portada.</small>
+                </div>
+
+                <!-- PREVISUALIZACIÓN DE FOTOS -->
+                <div class="preview-imagen" id="preview-imagen"></div>
+
+                <!-- MENSAJE DE ERROR -->
+                <div class="mensaje-error" id="mensaje-error"></div>
+
+                <!-- BOTONES -->
+                <div class="modal-botones">
+                    <button type="button" class="boton-cancelar" id="boton-cancelar">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="boton-guardar" id="boton-guardar">
+                        Guardar producto
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- =========================================================
+         MODAL DESCUENTO GLOBAL POR TIPO
+    ========================================================== -->
+    <div class="modal-fondo" id="modal-descuento">
+        <div class="modal modal-chico">
+
+            <div class="modal-header">
+                <div>
+                    <h2>Descuento por Tipo</h2>
+                    <p>Aplicá un descuento masivo a todos los productos seleccionados.</p>
+                </div>
+                <button type="button" class="modal-cerrar" id="modal-cerrar-descuento" aria-label="Cerrar">×</button>
+            </div>
+
+            <form id="form-descuento-masivo">
+
+                <div class="campo">
+                    <label for="descuento-tipo-select">Seleccionar Tipo / Categoría</label>
+                    <select id="descuento-tipo-select" required>
+                        <option value="todos">Todos los productos</option>
+                        <option value="aros">Aros</option>
+                        <option value="abridores">Abridores</option>
+                        <option value="pulseras">Pulseras</option>
+                        <option value="anillos">Anillos</option>
+                        <option value="collares">Collares</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="descuento-porcentaje">Porcentaje de Descuento (%)</label>
+                    <input
+                        type="number"
+                        id="descuento-porcentaje"
+                        min="0"
+                        max="100"
+                        step="1"
+                        placeholder="Ej: 15 (0 para quitar descuento)"
+                        required
+                    >
+                    <small>Ingresá 0 si querés quitar los descuentos a ese tipo de producto.</small>
+                </div>
+
+                <!-- MENSAJE DE ERROR DESCUENTO -->
+                <div class="mensaje-error" id="mensaje-error-descuento"></div>
+
+                <!-- BOTONES -->
+                <div class="modal-botones">
+                    <button type="button" class="boton-cancelar" id="boton-cancelar-descuento">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="boton-guardar" id="boton-aplicar-descuento">
+                        Aplicar descuento
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- =========================================================
+         SUPABASE JS
+    ========================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- =========================================================
+         JAVASCRIPT ADMIN
+    ========================================================== -->
+    <script>
+
+        /* ========================================================
+           SUPABASE CLIENT
+        ======================================================== */
+        const SUPABASE_URL = "https://fnpxfmdgilsuipwyrkzs.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_K-2L2v84e3yEme6vSFzbAw_E8MiIpHr";
+
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY, {
+            auth: {
+                persistSession: true,
+                autoRefreshToken: true,
+                detectSessionInUrl: true
+            }
+        });
+
+        /* ========================================================
+           VARIABLES Y ELEMENTOS DOM
+        ======================================================== */
+        let productosCargados = [];
+
+        const tablaProductos = document.getElementById("tabla-productos");
+        const buscador = document.getElementById("buscador");
+        const statTotal = document.getElementById("stat-total");
+        const statSinStock = document.getElementById("stat-sin-stock");
+        const statCategorias = document.getElementById("stat-categorias");
+
+        // Modal Producto
+        const modalFondo = document.getElementById("modal-fondo");
+        const modalTitulo = document.getElementById("modal-titulo");
+        const modalSubtitulo = document.getElementById("modal-subtitulo");
+        const formulario = document.getElementById("form-producto");
+        const inputId = document.getElementById("producto-id");
+        const inputImagenActual = document.getElementById("imagen-actual");
+        const textoAyudaImagen = document.getElementById("texto-ayuda-imagen");
+        const mensajeError = document.getElementById("mensaje-error");
+        const botonGuardar = document.getElementById("boton-guardar");
+        const inputImagen = document.getElementById("imagen");
+        const previewImagen = document.getElementById("preview-imagen");
+
+        // Modal Descuento Masivo
+        const modalDescuento = document.getElementById("modal-descuento");
+        const formDescuentoMasivo = document.getElementById("form-descuento-masivo");
+        const mensajeErrorDescuento = document.getElementById("mensaje-error-descuento");
+        const botonAplicarDescuento = document.getElementById("boton-aplicar-descuento");
+
+        /* ========================================================
+           VERIFICAR SESIÓN
+        ======================================================== */
+        async function verificarSesion() {
+            const { data, error } = await supabaseClient.auth.getSession();
+
+            if (error || !data || !data.session) {
+                console.warn("No hay sesión válida activa, redirigiendo a login...");
+                window.location.href = "login.html";
+                return null;
+            }
+
+            return data.session;
+        }
+
+        /* ========================================================
+           CARGAR PRODUCTOS DESDE SUPABASE
+        ======================================================== */
+        async function cargarProductosAdmin() {
+            try {
+                const { data: productos, error } = await supabaseClient
+                    .from("productos")
+                    .select("*")
+                    .order("id", { ascending: false });
+
+                if (error) throw error;
+
+                productosCargados = productos || [];
+                mostrarProductosAdmin(productosCargados);
+                actualizarEstadisticas(productosCargados);
+
+            } catch (error) {
+                console.error("Error en cargarProductosAdmin:", error);
+                tablaProductos.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding:40px; color:#b33434;">
+                            No se pudieron cargar los productos: ${error.message}
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        /* ========================================================
+           RENDERIZAR TABLA DE PRODUCTOS
+        ======================================================== */
+        function mostrarProductosAdmin(productos) {
+            tablaProductos.innerHTML = "";
+
+            if (!productos || productos.length === 0) {
+                tablaProductos.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding:40px; color:#777;">
+                            No hay productos cargados en la base de datos.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            productos.forEach(producto => {
+                const fila = document.createElement("tr");
+
+                const precio = Number(producto.precio || 0);
+                const descuento = Number(producto.descuento || 0);
+                const stock = Number(producto.cantidad_disponible ?? producto.stock ?? 0);
+                const precioFinal = descuento > 0 ? precio * (1 - (descuento / 100)) : precio;
+                const imagen = producto.imagen || "images/sin-imagen.jpg";
+
+                fila.innerHTML = `
+                    <td>
+                        <div class="producto-admin">
+                            <img src="${imagen}" alt="${producto.nombre || ''}">
+                            <span>${producto.nombre || "Sin nombre"}</span>
+                        </div>
+                    </td>
+
+                    <td>${formatearTexto(producto.categoria || producto.material)}</td>
+
+                    <td>${formatearTexto(producto.tipo)}</td>
+
+                    <td>
+                        ${
+                            descuento > 0
+                            ? `
+                                <span style="text-decoration:line-through; color:#999; font-size:12px;">
+                                    $${precio.toLocaleString("es-AR")}
+                                </span>
+                                <br>
+                                <strong>$${precioFinal.toLocaleString("es-AR")}</strong>
+                                <small style="display:block; color:#d65a73; font-weight:bold;">${descuento}% OFF</small>
+                            `
+                            : `<strong>$${precio.toLocaleString("es-AR")}</strong>`
+                        }
+                    </td>
+
+                    <td>
+                        <span class="stock ${stock > 0 ? 'disponible' : 'agotado'}">
+                            ${stock}
+                        </span>
+                    </td>
+
+                    <td>
+                        <div class="acciones">
+                            <button class="boton-editar" type="button" onclick="editarProducto(${producto.id})">
+                                Editar
+                            </button>
+                            <button class="boton-eliminar" type="button" onclick="eliminarProducto(${producto.id})">
+                                Eliminar
+                            </button>
+                        </div>
+                    </td>
+                `;
+
+                tablaProductos.appendChild(fila);
+            });
+        }
+
+        /* ========================================================
+           UTILIDADES
+        ======================================================== */
+        function formatearTexto(texto) {
+            if (!texto) return "—";
+            return texto
+                .toString()
+                .replace(/-/g, " ")
+                .replace(/\b\w/g, letra => letra.toUpperCase());
+        }
+
+        function actualizarEstadisticas(productos) {
+            const total = productos.length;
+            const sinStock = productos.filter(p => Number(p.cantidad_disponible ?? p.stock ?? 0) <= 0).length;
+            const categorias = new Set(productos.map(p => p.categoria || p.material).filter(Boolean)).size;
+
+            statTotal.textContent = total;
+            statSinStock.textContent = sinStock;
+            statCategorias.textContent = categorias;
+        }
+
+        /* ========================================================
+           BUSCADOR
+        ======================================================== */
+        buscador.addEventListener("input", () => {
+            const texto = buscador.value.toLowerCase().trim();
+
+            if (texto === "") {
+                mostrarProductosAdmin(productosCargados);
+                return;
+            }
+
+            const filtrados = productosCargados.filter(producto => {
+                const nombre = (producto.nombre || "").toLowerCase();
+                const categoria = (producto.categoria || producto.material || "").toLowerCase();
+                const tipo = (producto.tipo || "").toLowerCase();
+
+                return nombre.includes(texto) || categoria.includes(texto) || tipo.includes(texto);
+            });
+
+            mostrarProductosAdmin(filtrados);
+        });
+
+        /* ========================================================
+           MODAL PRODUCTO (CREAR)
+        ======================================================== */
+        function abrirModalCrear() {
+            formulario.reset();
+            inputId.value = "";
+            inputImagenActual.value = "";
+            previewImagen.innerHTML = "";
+            previewImagen.style.display = "none";
+            mensajeError.style.display = "none";
+            textoAyudaImagen.textContent = "Podés seleccionar una o varias fotos (la 1ra será la de portada).";
+
+            modalTitulo.textContent = "Agregar producto";
+            modalSubtitulo.textContent = "Completá los datos del nuevo producto.";
+            botonGuardar.textContent = "Guardar producto";
+
+            modalFondo.classList.add("activo");
+            document.getElementById("nombre").focus();
+        }
+
+        function cerrarModal() {
+            modalFondo.classList.remove("activo");
+            formulario.reset();
+            inputId.value = "";
+            inputImagenActual.value = "";
+            previewImagen.innerHTML = "";
+            previewImagen.style.display = "none";
+            mensajeError.style.display = "none";
+            botonGuardar.disabled = false;
+            botonGuardar.textContent = "Guardar producto";
+        }
+
+        document.getElementById("boton-agregar").addEventListener("click", abrirModalCrear);
+        document.getElementById("modal-cerrar").addEventListener("click", cerrarModal);
+        document.getElementById("boton-cancelar").addEventListener("click", cerrarModal);
+
+        modalFondo.addEventListener("click", event => {
+            if (event.target === modalFondo) cerrarModal();
+        });
+
+        /* ========================================================
+           PREVISUALIZAR IMÁGENES LOCALES
+        ======================================================== */
+        inputImagen.addEventListener("change", () => {
+            const archivos = Array.from(inputImagen.files);
+            previewImagen.innerHTML = "";
+
+            if (archivos.length === 0) {
+                if (inputImagenActual.value) {
+                    renderizarFotoMiniatura(inputImagenActual.value, "Portada");
+                    previewImagen.style.display = "flex";
+                } else {
+                    previewImagen.style.display = "none";
+                }
+                return;
+            }
+
+            archivos.forEach((archivo, i) => {
+                const lector = new FileReader();
+                lector.onload = function(event) {
+                    renderizarFotoMiniatura(event.target.result, i === 0 ? "Portada" : null);
+                };
+                lector.readAsDataURL(archivo);
+            });
+
+            previewImagen.style.display = "flex";
+        });
+
+        function renderizarFotoMiniatura(src, etiqueta = null) {
+            const wrap = document.createElement("div");
+            wrap.classList.add("preview-foto-wrap");
+
+            const img = document.createElement("img");
+            img.src = src;
+            wrap.appendChild(img);
+
+            if (etiqueta) {
+                const badge = document.createElement("span");
+                badge.classList.add("badge-portada");
+                badge.textContent = etiqueta;
+                wrap.appendChild(badge);
+            }
+
+            previewImagen.appendChild(wrap);
+        }
+
+        /* ========================================================
+           SUBIR MÚLTIPLES IMÁGENES A STORAGE
+        ======================================================== */
+        async function subirImagenes(archivos) {
+            const resultados = [];
+
+            for (let i = 0; i < archivos.length; i++) {
+                const archivo = archivos[i];
+                const extension = archivo.name.split(".").pop().toLowerCase();
+                const nombreArchivo = `${Date.now()}-${crypto.randomUUID()}.${extension}`;
+
+                const { error } = await supabaseClient
+                    .storage
+                    .from("productos")
+                    .upload(nombreArchivo, archivo, {
+                        contentType: archivo.type,
+                        upsert: false
+                    });
+
+                if (error) {
+                    console.error("Error subiendo imagen:", error);
+                    throw new Error("No se pudo subir la imagen: " + error.message);
+                }
+
+                const { data: urlData } = supabaseClient
+                    .storage
+                    .from("productos")
+                    .getPublicUrl(nombreArchivo);
+
+                resultados.push({
+                    nombreArchivo: nombreArchivo,
+                    publicUrl: urlData.publicUrl
+                });
+            }
+
+            return resultados;
+        }
+
+        /* ========================================================
+           EDITAR PRODUCTO
+        ======================================================== */
+        async function editarProducto(id) {
+            const producto = productosCargados.find(item => item.id === id);
+            if (!producto) return;
+
+            formulario.reset();
+            mensajeError.style.display = "none";
+            previewImagen.innerHTML = "";
+
+            inputId.value = producto.id;
+            document.getElementById("nombre").value = producto.nombre || "";
+            document.getElementById("precio").value = producto.precio || 0;
+            document.getElementById("descuento").value = producto.descuento || 0;
+            document.getElementById("categoria").value = producto.categoria || producto.material || "";
+            document.getElementById("tipo").value = producto.tipo || "";
+            document.getElementById("cantidad_disponible").value = producto.cantidad_disponible ?? producto.stock ?? 1;
+            document.getElementById("descripcion").value = producto.descripcion || "";
+
+            inputImagenActual.value = producto.imagen || "";
+
+            try {
+                const { data: fotosGuardadas } = await supabaseClient
+                    .from("producto_imagenes")
+                    .select("*")
+                    .eq("producto_id", producto.id)
+                    .order("orden", { ascending: true });
+
+                if (fotosGuardadas && fotosGuardadas.length > 0) {
+                    fotosGuardadas.forEach((foto, index) => {
+                        const url = foto.imagen.startsWith("http")
+                            ? foto.imagen
+                            : `${SUPABASE_URL}/storage/v1/object/public/productos/${foto.imagen}`;
+                        renderizarFotoMiniatura(url, index === 0 ? "Portada" : null);
+                    });
+                    previewImagen.style.display = "flex";
+                } else if (producto.imagen) {
+                    renderizarFotoMiniatura(producto.imagen, "Portada");
+                    previewImagen.style.display = "flex";
+                }
+            } catch (e) {
+                if (producto.imagen) {
+                    renderizarFotoMiniatura(producto.imagen, "Portada");
+                    previewImagen.style.display = "flex";
+                }
+            }
+
+            textoAyudaImagen.textContent = "Si elegís nuevas fotos se reemplazarán las actuales. Si no elegís nada, se mantienen las actuales.";
+            modalTitulo.textContent = "Editar producto";
+            modalSubtitulo.textContent = `Modificá los datos de "${producto.nombre}".`;
+            botonGuardar.textContent = "Actualizar producto";
+
+            modalFondo.classList.add("activo");
+            document.getElementById("nombre").focus();
+        }
+
+        /* ========================================================
+           GUARDAR / ACTUALIZAR PRODUCTO (CON GALERÍA)
+        ======================================================== */
+        formulario.addEventListener("submit", async event => {
+            event.preventDefault();
+            mensajeError.style.display = "none";
+            botonGuardar.disabled = true;
+
+            const esEdicion = Boolean(inputId.value);
+            botonGuardar.textContent = esEdicion ? "Actualizando..." : "Guardando...";
+
+            try {
+                const sesion = await verificarSesion();
+                if (!sesion) return;
+
+                const nombre = document.getElementById("nombre").value.trim();
+                const precio = Number(document.getElementById("precio").value);
+                const descuento = Number(document.getElementById("descuento").value || 0);
+                const categoria = document.getElementById("categoria").value;
+                const tipo = document.getElementById("tipo").value;
+                const cantidadDisponible = Number(document.getElementById("cantidad_disponible").value);
+                const descripcion = document.getElementById("descripcion").value.trim();
+                const archivos = Array.from(inputImagen.files);
+
+                if (!nombre) throw new Error("Ingresá el nombre del producto.");
+                if (!Number.isFinite(precio) || precio < 0) throw new Error("Ingresá un precio válido.");
+                if (descuento < 0 || descuento > 100) throw new Error("El descuento debe ser entre 0% y 100%.");
+                if (!categoria) throw new Error("Seleccioná un material.");
+                if (!tipo) throw new Error("Seleccioná un tipo.");
+
+                // 1. Subir imágenes si seleccionó archivos nuevos
+                let fotosSubidas = [];
+                if (archivos.length > 0) {
+                    botonGuardar.textContent = `Subiendo ${archivos.length} foto(s)...`;
+                    fotosSubidas = await subirImagenes(archivos);
+                }
+
+                // Portada principal
+                let urlPortada = inputImagenActual.value || null;
+                if (fotosSubidas.length > 0) {
+                    urlPortada = fotosSubidas[0].publicUrl;
+                }
+
+                const datosProducto = {
+                    nombre: nombre,
+                    precio: precio,
+                    categoria: categoria,
+                    material: categoria,
+                    tipo: tipo,
+                    descripcion: descripcion || null,
+                    imagen: urlPortada,
+                    descuento: descuento,
+                    cantidad_disponible: cantidadDisponible,
+                    disponible: cantidadDisponible > 0
+                };
+
+                let idProductoFinal = inputId.value;
+
+                if (esEdicion) {
+                    // ACTUALIZAR PRODUCTO
+                    botonGuardar.textContent = "Actualizando datos...";
+                    const { error: errorUpdate } = await supabaseClient
+                        .from("productos")
+                        .update(datosProducto)
+                        .eq("id", idProductoFinal);
+
+                    if (errorUpdate) throw errorUpdate;
+
+                    // Si subió fotos nuevas en edición, actualizar la tabla producto_imagenes
+                    if (fotosSubidas.length > 0) {
+                        botonGuardar.textContent = "Actualizando galería de imágenes...";
+                        
+                        await supabaseClient
+                            .from("producto_imagenes")
+                            .delete()
+                            .eq("producto_id", idProductoFinal);
+
+                        const registrosImagenes = fotosSubidas.map((item, index) => ({
+                            producto_id: idProductoFinal,
+                            imagen: item.nombreArchivo,
+                            orden: index + 1
+                        }));
+
+                        const { error: errorImagenes } = await supabaseClient
+                            .from("producto_imagenes")
+                            .insert(registrosImagenes);
+
+                        if (errorImagenes) {
+                            console.error("Error guardando en producto_imagenes:", errorImagenes);
+                            throw new Error("El producto se actualizó pero falló la galería: " + errorImagenes.message);
+                        }
+                    }
+
+                    cerrarModal();
+                    await cargarProductosAdmin();
+                    alert("¡Producto actualizado correctamente! ✨");
+
+                } else {
+                    // CREAR PRODUCTO
+                    botonGuardar.textContent = "Guardando producto...";
+                    const { data: productoNuevo, error: errorInsert } = await supabaseClient
+                        .from("productos")
+                        .insert([datosProducto])
+                        .select()
+                        .single();
+
+                    if (errorInsert) throw errorInsert;
+
+                    idProductoFinal = productoNuevo.id;
+
+                    // Guardar todas las fotos en producto_imagenes
+                    if (fotosSubidas.length > 0) {
+                        botonGuardar.textContent = "Registrando fotos en la galería...";
+
+                        const registrosImagenes = fotosSubidas.map((item, index) => ({
+                            producto_id: idProductoFinal,
+                            imagen: item.nombreArchivo,
+                            orden: index + 1
+                        }));
+
+                        const { error: errorImagenes } = await supabaseClient
+                            .from("producto_imagenes")
+                            .insert(registrosImagenes);
+
+                        if (errorImagenes) {
+                            console.error("Error guardando en producto_imagenes:", errorImagenes);
+                            throw new Error("El producto se guardó pero falló al registrar las fotos secundarias: " + errorImagenes.message);
+                        }
+                    }
+
+                    cerrarModal();
+                    await cargarProductosAdmin();
+                    alert("¡Producto y todas sus fotos guardados con éxito! 💕");
+                }
+
+            } catch (error) {
+                console.error("Error en formulario:", error);
+                mensajeError.textContent = error.message || "No se pudo guardar el producto.";
+                mensajeError.style.display = "block";
+                botonGuardar.disabled = false;
+                botonGuardar.textContent = esEdicion ? "Actualizar producto" : "Guardar producto";
+            }
+        });
+
+        /* ========================================================
+           ELIMINAR PRODUCTO
+        ======================================================== */
+        async function eliminarProducto(id) {
+            const producto = productosCargados.find(item => item.id === id);
+            if (!producto) return;
+
+            const confirmar = confirm(`¿Estás seguro de que querés eliminar "${producto.nombre}"?`);
+            if (!confirmar) return;
+
+            try {
+                const { error } = await supabaseClient
+                    .from("productos")
+                    .delete()
+                    .eq("id", id);
+
+                if (error) throw error;
+
+                await cargarProductosAdmin();
+                alert("Producto eliminado correctamente.");
+
+            } catch (error) {
+                console.error("Error al eliminar:", error);
+                alert("No se pudo eliminar: " + error.message);
+            }
+        }
+
+        /* ========================================================
+           DESCUENTO GLOBAL POR TIPO
+        ======================================================== */
+        function abrirModalDescuento() {
+            formDescuentoMasivo.reset();
+            mensajeErrorDescuento.style.display = "none";
+            botonAplicarDescuento.disabled = false;
+            botonAplicarDescuento.textContent = "Aplicar descuento";
+            modalDescuento.classList.add("activo");
+        }
+
+        function cerrarModalDescuento() {
+            modalDescuento.classList.remove("activo");
+            formDescuentoMasivo.reset();
+            mensajeErrorDescuento.style.display = "none";
+        }
+
+        document.getElementById("boton-abrir-descuento").addEventListener("click", abrirModalDescuento);
+        document.getElementById("modal-cerrar-descuento").addEventListener("click", cerrarModalDescuento);
+        document.getElementById("boton-cancelar-descuento").addEventListener("click", cerrarModalDescuento);
+
+        modalDescuento.addEventListener("click", event => {
+            if (event.target === modalDescuento) cerrarModalDescuento();
+        });
+
+        formDescuentoMasivo.addEventListener("submit", async event => {
+            event.preventDefault();
+            mensajeErrorDescuento.style.display = "none";
+            botonAplicarDescuento.disabled = true;
+            botonAplicarDescuento.textContent = "Aplicando...";
+
+            try {
+                const sesion = await verificarSesion();
+                if (!sesion) return;
+
+                const tipoSeleccionado = document.getElementById("descuento-tipo-select").value;
+                const nuevoDescuento = Number(document.getElementById("descuento-porcentaje").value);
+
+                if (nuevoDescuento < 0 || nuevoDescuento > 100) {
+                    throw new Error("El descuento debe estar entre 0% y 100%.");
+                }
+
+                let query = supabaseClient
+                    .from("productos")
+                    .update({ descuento: nuevoDescuento });
+
+                if (tipoSeleccionado === "todos") {
+                    query = query.gt("id", 0);
+                } else {
+                    query = query.eq("tipo", tipoSeleccionado);
+                }
+
+                const { error: errorDescuento } = await query;
+                if (errorDescuento) throw errorDescuento;
+
+                cerrarModalDescuento();
+                await cargarProductosAdmin();
+
+                const mensajeExito = tipoSeleccionado === "todos"
+                    ? `¡Se aplicó el ${nuevoDescuento}% de descuento a TODOS los productos!`
+                    : `¡Se aplicó el ${nuevoDescuento}% de descuento a todos los "${formatearTexto(tipoSeleccionado)}"!`;
+
+                alert(mensajeExito);
+
+            } catch (error) {
+                console.error("Error aplicando descuento masivo:", error);
+                mensajeErrorDescuento.textContent = error.message || "No se pudo aplicar el descuento.";
+                mensajeErrorDescuento.style.display = "block";
+                botonAplicarDescuento.disabled = false;
+                botonAplicarDescuento.textContent = "Aplicar descuento";
+            }
+        });
+
+        /* ========================================================
+           CERRAR SESIÓN
+        ======================================================== */
+        document.getElementById("boton-cerrar").addEventListener("click", async () => {
+            await supabaseClient.auth.signOut();
+            localStorage.clear();
+            window.location.href = "login.html";
+        });
+
+        /* ========================================================
+           INICIALIZAR PANEL
+        ======================================================== */
+        async function iniciarAdmin() {
+            const sesion = await verificarSesion();
+            if (sesion) {
+                await cargarProductosAdmin();
+            }
+        }
+
+        iniciarAdmin();
+
+    </script>
+</body>
+</html>

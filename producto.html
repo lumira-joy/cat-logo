@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto | Lumira</title>
+    <link rel="stylesheet" href="stylep.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         BARRA SUPERIOR
+    ========================================================== -->
+    <header class="top-bar">
+
+        <a href="index.html" class="volver">
+            ← Volver al catálogo
+        </a>
+
+        <div class="logo-central">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Lumira">
+            </a>
+        </div>
+
+        <button class="boton-carrito" onclick="abrirCarrito()" aria-label="Ver mi selección">
+            <img src="images/carrito.png" alt="Carrito" style="width:24px; height:24px;">
+            <span id="contador-carrito" class="contador-carrito">0</span>
+        </button>
+
+    </header>
+
+    <!-- =========================================================
+         PRODUCTO
+    ========================================================== -->
+    <main class="producto-pagina">
+
+        <!-- =====================================================
+             GALERÍA
+        ====================================================== -->
+        <section class="galeria">
+
+            <!-- MINIATURAS -->
+            <div class="miniaturas" id="miniaturas"></div>
+
+            <!-- IMAGEN PRINCIPAL -->
+            <div class="imagen-principal">
+                <img
+                    id="imagenPrincipal"
+                    src="images/sin-imagen.jpg"
+                    alt="Cargando producto..."
+                >
+                <!-- Cuadro de zoom para PC -->
+                <div id="zoom-lupa" class="zoom-lupa"></div>
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             INFORMACIÓN DEL PRODUCTO
+        ====================================================== -->
+        <section class="informacion">
+
+            <!-- NOMBRE -->
+            <h1 id="nombre">Cargando...</h1>
+
+            <!-- PRECIOS -->
+            <div class="precios" id="contenedor-precios">
+                <del id="precioAnterior" class="precio-anterior" style="display:none;"></del>
+                <span id="precio" class="precio"></span>
+                <span id="descuento" class="descuento" style="display:none;"></span>
+            </div>
+
+            <!-- CARACTERÍSTICAS -->
+            <div class="caracteristicas">
+                <p>
+                    <strong>Material:</strong>
+                    <span id="material">—</span>
+                </p>
+                <p>
+                    <strong>Tipo:</strong>
+                    <span id="tipo">—</span>
+                </p>
+                <p id="fila-medidas" style="display:none;">
+                    <strong>Medidas:</strong>
+                    <span id="medidas">—</span>
+                </p>
+                <p id="fila-cierre" style="display:none;">
+                    <strong>Cierre:</strong>
+                    <span id="cierre">—</span>
+                </p>
+                <p id="fila-color" style="display:none;">
+                    <strong>Color:</strong>
+                    <span id="color">—</span>
+                </p>
+            </div>
+
+            <!-- DESCRIPCIÓN -->
+            <div class="descripcion" id="contenedor-descripcion" style="display:none;">
+                <h2>Descripción</h2>
+                <p id="descripcion"></p>
+            </div>
+
+            <!-- DISPONIBILIDAD -->
+            <p id="disponibilidad" class="disponibilidad"></p>
+
+            <!-- BOTÓN AGREGAR -->
+            <button id="agregar" class="boton-agregar" type="button">
+                + Agregar a mi selección
+            </button>
+
+        </section>
+
+    </main>
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+    <script>
+
+        /* ========================================================
+           SUPABASE CONFIG
+        ======================================================== */
+        const SUPABASE_URL = "https://fnpxfmdgilsuipwyrkzs.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_K-2L2v84e3yEme6vSFzbAw_E8MiIpHr";
+
+        /* ========================================================
+           PARÁMETROS Y VARIABLES
+        ======================================================== */
+        const parametros = new URLSearchParams(window.location.search);
+        const productoId = parametros.get("id");
+
+        let productoActual = null;
+        let carrito = [];
+
+        /* ========================================================
+           RESOLVER URL DE IMAGEN
+        ======================================================== */
+        function resolverURL(nombreOUrl) {
+            if (!nombreOUrl) return "images/sin-imagen.jpg";
+            if (nombreOUrl.startsWith("http://") || nombreOUrl.startsWith("https://") || nombreOUrl.startsWith("images/")) {
+                return nombreOUrl;
+            }
+            return `${SUPABASE_URL}/storage/v1/object/public/productos/${nombreOUrl}`;
+        }
+
+        function formatearTexto(texto) {
+            if (!texto) return "—";
+            return texto
+                .toString()
+                .replace(/-/g, " ")
+                .replace(/\b\w/g, l => l.toUpperCase());
+        }
+
+        /* ========================================================
+           CARGAR PRODUCTO
+        ======================================================== */
+        async function cargarProducto() {
+            try {
+                if (!productoId) {
+                    throw new Error("No se especificó ningún ID de producto.");
+                }
+
+                // 1. Obtener producto
+                const respuestaProd = await fetch(
+                    `${SUPABASE_URL}/rest/v1/productos?id=eq.${productoId}&select=*`,
+                    { headers: { "apikey": SUPABASE_KEY } }
+                );
+
+                if (!respuestaProd.ok) {
+                    throw new Error("Error al consultar el producto: " + respuestaProd.status);
+                }
+
+                const productos = await respuestaProd.json();
+
+                if (!productos || productos.length === 0) {
+                    throw new Error("El producto solicitado no existe.");
+                }
+
+                productoActual = productos[0];
+                mostrarInformacion(productoActual);
+
+                // 2. Obtener imágenes de la tabla producto_imagenes
+                let listaImagenes = [];
+
+                try {
+                    const respuestaImgs = await fetch(
+                        `${SUPABASE_URL}/rest/v1/producto_imagenes?producto_id=eq.${productoId}&select=*&order=orden.asc`,
+                        { headers: { "apikey": SUPABASE_KEY } }
+                    );
+
+                    if (respuestaImgs.ok) {
+                        const imgs = await respuestaImgs.json();
+                        if (imgs && imgs.length > 0) {
+                            listaImagenes = imgs.map(item => item.imagen);
+                        }
+                    }
+                } catch (e) {
+                    console.warn("No se pudieron cargar fotos secundarias:", e);
+                }
+
+                // Si no hay en producto_imagenes, usar la portada
+                if (listaImagenes.length === 0 && productoActual.imagen) {
+                    listaImagenes.push(productoActual.imagen);
+                }
+
+                mostrarGaleria(listaImagenes);
+                actualizarBotonEstado();
+
+            } catch (error) {
+                console.error("Error en cargarProducto:", error);
+                document.querySelector(".producto-pagina").innerHTML = `
+                    <div class="error" style="text-align:center; padding:50px 20px; width:100%;">
+                        <h2>No se pudo cargar el producto</h2>
+                        <p style="color:#777; margin:15px 0;">${error.message}</p>
+                        <a href="index.html" class="volver" style="display:inline-block; margin-top:10px;">
+                            ← Volver al catálogo
+                        </a>
+                    </div>
+                `;
+            }
+        }
+
+        /* ========================================================
+           MOSTRAR INFORMACIÓN
+        ======================================================== */
+        function mostrarInformacion(producto) {
+            document.getElementById("nombre").textContent = producto.nombre || "Sin nombre";
+
+            const precioOriginal = Number(producto.precio || 0);
+            const porcentajeDescuento = Number(producto.descuento || 0);
+            const precioFinal = porcentajeDescuento > 0
+                ? precioOriginal * (1 - porcentajeDescuento / 100)
+                : precioOriginal;
+
+            const elemPrecio = document.getElementById("precio");
+            const elemPrecioAnterior = document.getElementById("precioAnterior");
+            const elemDescuento = document.getElementById("descuento");
+
+            elemPrecio.textContent = "$" + precioFinal.toLocaleString("es-AR");
+
+            if (porcentajeDescuento > 0) {
+                elemPrecioAnterior.textContent = "$" + precioOriginal.toLocaleString("es-AR");
+                elemPrecioAnterior.style.display = "inline";
+
+                elemDescuento.textContent = porcentajeDescuento + "% OFF";
+                elemDescuento.style.display = "inline-block";
+            } else {
+                elemPrecioAnterior.style.display = "none";
+                elemDescuento.style.display = "none";
+            }
+
+            document.getElementById("material").textContent = formatearTexto(producto.material || producto.categoria);
+            document.getElementById("tipo").textContent = formatearTexto(producto.tipo);
+
+            if (producto.medidas) {
+                document.getElementById("medidas").textContent = producto.medidas;
+                document.getElementById("fila-medidas").style.display = "block";
+            }
+            if (producto.cierre) {
+                document.getElementById("cierre").textContent = producto.cierre;
+                document.getElementById("fila-cierre").style.display = "block";
+            }
+            if (producto.color) {
+                document.getElementById("color").textContent = producto.color;
+                document.getElementById("fila-color").style.display = "block";
+            }
+
+            if (producto.descripcion && producto.descripcion.trim() !== "") {
+                document.getElementById("descripcion").textContent = producto.descripcion;
+                document.getElementById("contenedor-descripcion").style.display = "block";
+            }
+
+            const stock = Number(producto.cantidad_disponible ?? producto.stock ?? 0);
+            const elemDisponibilidad = document.getElementById("disponibilidad");
+            const btnAgregar = document.getElementById("agregar");
+
+            if (stock > 0) {
+                elemDisponibilidad.textContent = "✓ En stock disponible";
+                elemDisponibilidad.className = "disponibilidad disponible";
+                btnAgregar.disabled = false;
+            } else {
+                elemDisponibilidad.textContent = "Agotado por el momento";
+                elemDisponibilidad.className = "disponibilidad no-disponible";
+                btnAgregar.disabled = true;
+                btnAgregar.textContent = "Sin stock";
+            }
+        }
+
+        /* ========================================================
+           MOSTRAR GALERÍA
+        ======================================================== */
+        function mostrarGaleria(imagenes) {
+            const miniaturasContenedor = document.getElementById("miniaturas");
+            const imgPrincipal = document.getElementById("imagenPrincipal");
+            miniaturasContenedor.innerHTML = "";
+
+            if (!imagenes || imagenes.length === 0) {
+                imgPrincipal.src = "images/sin-imagen.jpg";
+                return;
+            }
+
+            // Imagen principal de arranque
+            const urlPrimera = resolverURL(imagenes[0]);
+            imgPrincipal.src = urlPrimera;
+            imgPrincipal.alt = productoActual.nombre || "Joya Lumira";
+
+            // Si hay más de 1 imagen, creamos las miniaturas
+            if (imagenes.length > 1) {
+                imagenes.forEach((nombreImg, index) => {
+                    const url = resolverURL(nombreImg);
+                    const mini = document.createElement("img");
+                    mini.src = url;
+                    mini.alt = `Foto ${index + 1}`;
+                    mini.classList.add("miniatura");
+                    if (index === 0) mini.classList.add("activa");
+
+                    mini.addEventListener("click", () => {
+                        imgPrincipal.src = url;
+                        document.querySelectorAll(".miniatura").forEach(m => m.classList.remove("activa"));
+                        mini.classList.add("activa");
+                    });
+
+                    miniaturasContenedor.appendChild(mini);
+                });
+            }
+        }
+
+        /* ========================================================
+           ZOOM LUPA PARA COMPUTADORAS
+        ======================================================== */
+        const imagenPrincipal = document.getElementById("imagenPrincipal");
+        const zoom = document.getElementById("zoom-lupa");
+
+        imagenPrincipal.addEventListener("mousemove", function (e) {
+            if (window.innerWidth <= 700) return;
+
+            const rect = imagenPrincipal.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const porcentajeX = (x / rect.width) * 100;
+            const porcentajeY = (y / rect.height) * 100;
+
+            zoom.style.display = "block";
+            zoom.style.backgroundImage = `url("${imagenPrincipal.src}")`;
+            zoom.style.backgroundPosition = `${porcentajeX}% ${porcentajeY}%`;
+        });
+
+        imagenPrincipal.addEventListener("mouseleave", function () {
+            zoom.style.display = "none";
+        });
+
+        /* ========================================================
+           MANEJO DE CARRITO
+        ======================================================== */
+        function cargarCarritoGuardado() {
+            const guardado = localStorage.getItem("lumiraCarrito");
+            if (!guardado) {
+                carrito = [];
+                return;
+            }
+            try {
+                carrito = JSON.parse(guardado) || [];
+            } catch (e) {
+                carrito = [];
+            }
+        }
+
+        function guardarCarrito() {
+            localStorage.setItem("lumiraCarrito", JSON.stringify(carrito));
+            actualizarContadorCarrito();
+            actualizarBotonEstado();
+        }
+
+        function actualizarContadorCarrito() {
+            const contador = document.getElementById("contador-carrito");
+            if (!contador) return;
+            const cantidad = carrito.reduce((total, p) => total + (p.cantidad || 1), 0);
+            contador.textContent = cantidad;
+        }
+
+        function actualizarBotonEstado() {
+            const btnAgregar = document.getElementById("agregar");
+            if (!productoActual || !btnAgregar) return;
+
+            const stock = Number(productoActual.cantidad_disponible ?? productoActual.stock ?? 0);
+            if (stock <= 0) return;
+
+            const existente = carrito.find(item => item.id === productoActual.id);
+            if (existente) {
+                btnAgregar.textContent = `✓ Añadido (${existente.cantidad})`;
+                btnAgregar.classList.add("producto-anadido");
+            } else {
+                btnAgregar.textContent = "+ Agregar a mi selección";
+                btnAgregar.classList.remove("producto-anadido");
+            }
+        }
+
+        function agregarProductoAlCarrito() {
+            if (!productoActual) return;
+
+            const stock = Number(productoActual.cantidad_disponible ?? productoActual.stock ?? 0);
+            if (stock <= 0) {
+                alert("Este producto no tiene stock disponible.");
+                return;
+            }
+
+            const existente = carrito.find(item => item.id === productoActual.id);
+
+            if (existente) {
+                if (existente.cantidad >= stock) {
+                    alert("Ya seleccionaste todas las unidades disponibles en stock de este producto. 💕");
+                    return;
+                }
+                existente.cantidad++;
+            } else {
+                carrito.push({
+                    ...productoActual,
+                    cantidad: 1
+                });
+            }
+
+            guardarCarrito();
+        }
+
+        document.getElementById("agregar").addEventListener("click", agregarProductoAlCarrito);
+
+        function abrirCarrito() {
+            window.location.href = "carrito.html";
+        }
+
+        /* ========================================================
+           INICIALIZAR
+        ======================================================== */
+        cargarCarritoGuardado();
+        actualizarContadorCarrito();
+        cargarProducto();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mi selección | Lumira</title>
+
+    <link
+        rel="stylesheet"
+        href="carrito.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         FONDO
+    ========================================================== -->
+
+    <div class="fondo-desenfocado"></div>
+
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+
+    <header class="carrito-top">
+
+
+        <a href="index.html" class="volver">
+           <span class="volver-pc">← Seguir viendo productos</span>
+           <span class="volver-celu">← Volver</span>
+        </a>
+
+
+
+        <div class="logo-carrito">
+
+            <img
+                src="images/logo.png"
+                alt="Lumira"
+            >
+
+        </div>
+
+
+    </header>
+
+
+
+
+    <!-- =========================================================
+         CONTENIDO
+    ========================================================== -->
+
+    <main class="pagina-carrito">
+
+
+        <h1>
+            Mi selección
+        </h1>
+
+
+        <p class="subtitulo">
+            Productos que querés consultar
+        </p>
+
+
+
+        <!-- =====================================================
+             LISTA
+        ====================================================== -->
+
+        <section
+            id="lista-carrito"
+            class="lista-carrito"
+        >
+
+        </section>
+
+
+
+        <!-- =====================================================
+             TOTAL
+        ====================================================== -->
+
+        <section
+            id="resumen-carrito"
+            class="resumen-carrito"
+        >
+
+        </section>
+
+
+
+        <!-- =====================================================
+             BOTONES
+        ====================================================== -->
+
+        <section
+            class="contacto-carrito"
+            id="botones-contacto"
+        >
+
+            <button
+                class="boton-whatsapp"
+                onclick="enviarWhatsApp()"
+            >
+
+                💬 Consultar por WhatsApp
+
+            </button>
+
+
+
+            <button
+                class="boton-instagram"
+                onclick="copiarMensajeInstagram()"
+            >
+
+                📷 Consultar por Instagram
+
+            </button>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script src="carrito.js"></script>
+
+
+</body>
+
+</html>

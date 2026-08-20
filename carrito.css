@@ -1,0 +1,702 @@
+/* =========================================================
+   FUENTE
+========================================================= */
+
+@font-face {
+
+    font-family: 'MUENOO';
+
+    src:
+        url('fonts/MUENOO.ttf')
+        format('truetype');
+
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    color: #222;
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   FONDO
+========================================================= */
+
+.fondo-desenfocado {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        url('images/desenfocado.jpg')
+        center / cover
+        no-repeat;
+
+    filter:
+        blur(8px);
+
+    transform:
+        scale(1.05);
+
+    z-index: -1;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.carrito-top {
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        10px 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #FFA8C0,
+            #FF764F
+        );
+
+    position: relative;
+
+}
+
+
+/* =========================================================
+   BOTÓN VOLVER
+========================================================= */
+
+.volver {
+
+    text-decoration: none;
+
+    color: #000;
+
+    font-weight: bold;
+
+    padding:
+        9px 13px;
+
+    border-radius: 8px;
+
+    transition:
+        background 0.2s;
+
+}
+
+
+.volver:hover {
+
+    background:
+        rgba(255,255,255,0.3);
+
+}
+
+
+/* Texto para PC */
+
+.volver-pc {
+
+    display: inline;
+
+}
+
+
+/* Texto para celular */
+
+.volver-celu {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo-carrito {
+
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.logo-carrito img {
+
+    height: 45px;
+
+    width: auto;
+
+}
+
+
+/* =========================================================
+   PÁGINA
+========================================================= */
+
+.pagina-carrito {
+
+    width: 90%;
+
+    max-width: 900px;
+
+    margin:
+        45px auto;
+
+    padding:
+        30px;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,0.15);
+
+}
+
+
+.pagina-carrito h1 {
+
+    text-align: center;
+
+    margin:
+        0 0 5px;
+
+    font-size: 32px;
+
+}
+
+
+.subtitulo {
+
+    text-align: center;
+
+    color: #777;
+
+    margin-top: 0;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* =========================================================
+   LISTA DE PRODUCTOS
+========================================================= */
+
+.lista-carrito {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+
+/* =========================================================
+   PRODUCTO
+========================================================= */
+
+.item-carrito {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px;
+
+    background: #fff;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.08);
+
+}
+
+
+/* =========================================================
+   IMAGEN DEL PRODUCTO
+========================================================= */
+
+.item-imagen {
+
+    width: 85px;
+
+    height: 85px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+}
+
+
+.item-imagen img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+/* =========================================================
+   INFORMACIÓN DEL PRODUCTO
+========================================================= */
+
+.item-info {
+
+    flex: 1;
+
+}
+
+
+.item-info h2 {
+
+    font-size: 18px;
+
+    margin:
+        0 0 7px;
+
+}
+
+
+.item-precio-original {
+
+    color: #888;
+
+    text-decoration:
+        line-through;
+
+    font-size: 13px;
+
+}
+
+
+.item-precio {
+
+    font-weight: bold;
+
+    font-size: 17px;
+
+}
+
+
+.item-descuento {
+
+    display: inline-block;
+
+    margin-left: 6px;
+
+    background:
+        #f56d6d;
+
+    color: #000;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    padding:
+        3px 6px;
+
+    border-radius: 5px;
+
+}
+
+
+/* =========================================================
+   BOTÓN ELIMINAR
+========================================================= */
+
+.item-eliminar {
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 25px;
+
+    color: #777;
+
+    cursor: pointer;
+
+    width: 35px;
+
+    height: 35px;
+
+    border-radius: 50%;
+
+}
+
+
+.item-eliminar:hover {
+
+    background:
+        #f5d0d0;
+
+    color: #000;
+
+}
+
+
+/* =========================================================
+   CARRITO VACÍO
+========================================================= */
+
+.carrito-vacio {
+
+    text-align: center;
+
+    padding:
+        50px 20px;
+
+    color: #777;
+
+}
+
+
+.carrito-vacio-icono {
+
+    font-size: 50px;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* =========================================================
+   RESUMEN
+========================================================= */
+
+.resumen-carrito {
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #ddd;
+
+    text-align: right;
+
+}
+
+
+.resumen-linea {
+
+    margin:
+        5px 0;
+
+}
+
+
+.resumen-total {
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    margin-top: 10px;
+
+}
+
+
+/* =========================================================
+   BOTONES DE CONTACTO
+========================================================= */
+
+.contacto-carrito {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 25px;
+
+}
+
+
+.contacto-carrito button {
+
+    flex: 1;
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding:
+        15px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+
+}
+
+
+.contacto-carrito button:hover {
+
+    transform:
+        translateY(-2px);
+
+    opacity: 0.9;
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+.boton-whatsapp {
+
+    background:
+        #25D366;
+
+    color:
+        #fff;
+
+}
+
+
+/* =========================================================
+   INSTAGRAM
+========================================================= */
+
+.boton-instagram {
+
+    background:
+        linear-gradient(
+            45deg,
+            #f58529,
+            #dd2a7b,
+            #8134af
+        );
+
+    color:
+        #fff;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - CELULAR
+========================================================= */
+
+@media (max-width: 600px) {
+
+
+    /* -------------------------------------------------------
+       HEADER
+    ------------------------------------------------------- */
+
+    .carrito-top {
+
+        height: 60px;
+
+        padding:
+            8px 15px;
+
+    }
+
+
+    /* -------------------------------------------------------
+       BOTÓN VOLVER
+    ------------------------------------------------------- */
+
+    .volver {
+
+        font-size: 14px;
+
+        padding:
+            6px 4px;
+
+        max-width: 90px;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+    .volver-pc {
+
+        display: none;
+
+    }
+
+
+    .volver-celu {
+
+        display: inline;
+
+    }
+
+
+    /* -------------------------------------------------------
+       LOGO
+    ------------------------------------------------------- */
+
+    .logo-carrito {
+
+        position: static;
+
+        transform: none;
+
+        margin:
+            0 auto;
+
+    }
+
+
+    .logo-carrito img {
+
+        height: 38px;
+
+    }
+
+
+    /* -------------------------------------------------------
+       PÁGINA
+    ------------------------------------------------------- */
+
+    .pagina-carrito {
+
+        width: 94%;
+
+        margin:
+            20px auto;
+
+        padding:
+            20px 15px;
+
+        border-radius: 14px;
+
+    }
+
+
+    .pagina-carrito h1 {
+
+        font-size: 28px;
+
+    }
+
+
+    /* -------------------------------------------------------
+       PRODUCTOS
+    ------------------------------------------------------- */
+
+    .item-carrito {
+
+        padding:
+            12px;
+
+    }
+
+
+    .item-imagen {
+
+        width: 70px;
+
+        height: 70px;
+
+    }
+
+
+    .item-info h2 {
+
+        font-size: 16px;
+
+    }
+
+
+    .item-precio {
+
+        font-size: 16px;
+
+    }
+
+
+    /* -------------------------------------------------------
+       BOTONES
+    ------------------------------------------------------- */
+
+    .contacto-carrito {
+
+        flex-direction: column;
+
+    }
+
+
+    .contacto-carrito button {
+
+        width: 100%;
+
+    }
+
+}

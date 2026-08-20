@@ -1,0 +1,1406 @@
+/* =========================================================
+   FUENTE
+========================================================= */
+
+@font-face {
+
+    font-family: 'MUENOO';
+
+    src:
+        url('fonts/MUENOO.ttf')
+        format('truetype');
+
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    margin: 0;
+    padding: 0;
+
+}
+
+
+body {
+
+    margin: 0;
+    padding: 0;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    color: #222;
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   FONDO DESENFOCADO
+========================================================= */
+
+.fondo-desenfocado {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        url('images/desenfocado.jpg')
+        center / cover
+        no-repeat;
+
+    filter:
+        blur(8px);
+
+    transform:
+        scale(1.05);
+
+    z-index: -1;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    width: 100%;
+
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        10px 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #FFA8C0,
+            #FF764F
+        );
+
+    position: relative;
+
+    z-index: 1000;
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo-container {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+
+.logo-img {
+
+    height: 48px;
+
+    width: auto;
+
+}
+
+
+.logo-text {
+
+    font-family:
+        'MUENOO',
+        cursive;
+
+    font-size: 32px;
+
+}
+
+
+/* =========================================================
+   INSTAGRAM
+========================================================= */
+
+.contacto {
+
+    margin-left: auto;
+
+    margin-right: 25px;
+
+}
+
+
+.contacto a {
+
+    text-decoration: none;
+
+    color: #000;
+
+    font-weight: bold;
+
+}
+
+
+.contacto a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================================================
+   CARRITO
+========================================================= */
+
+.boton-carrito {
+
+    position: relative;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    padding: 5px;
+
+}
+
+
+.boton-carrito img {
+
+    width: 34px;
+
+    height: 34px;
+
+    object-fit: contain;
+
+}
+
+
+.contador-carrito {
+
+    position: absolute;
+
+    top: -4px;
+
+    right: -5px;
+
+    min-width: 20px;
+
+    height: 20px;
+
+    padding: 0 5px;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    color: #000;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+/* =========================================================
+   BOTÓN MENÚ CELULAR
+========================================================= */
+
+.boton-menu-celu {
+
+    display: none;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    padding: 4px;
+
+}
+
+
+/* =========================================================
+   MENÚ PRINCIPAL PC
+========================================================= */
+
+.menu-principal {
+
+    width: 100%;
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    box-shadow:
+        0 2px 8px
+        rgba(0,0,0,0.12);
+
+    position: relative;
+
+    z-index: 900;
+
+}
+
+
+/* =========================================================
+   BOTONES PRINCIPALES
+========================================================= */
+
+.menu-principal-boton {
+
+    height: 55px;
+
+    border: none;
+
+    background: transparent;
+
+    padding:
+        0 18px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    white-space: nowrap;
+
+}
+
+
+.menu-principal-boton:hover {
+
+    background:
+        rgba(255,168,192,0.22);
+
+}
+
+
+/* =========================================================
+   DROPDOWN PRODUCTOS
+========================================================= */
+
+.menu-dropdown {
+
+    position: relative;
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.submenu-productos {
+
+    position: absolute;
+
+    top: 55px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 260px;
+
+    background: #fff;
+
+    border-radius:
+        0 0 12px 12px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.18);
+
+    padding: 10px;
+
+    display: none;
+
+}
+
+
+.submenu-productos.activo {
+
+    display: block;
+
+}
+
+
+/* =========================================================
+   MATERIAL PC
+========================================================= */
+
+.material-menu {
+
+    width: 100%;
+
+}
+
+
+.material-boton {
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    padding:
+        12px 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    border-radius: 7px;
+
+}
+
+
+.material-boton:hover {
+
+    background:
+        #f8eeee;
+
+}
+
+
+.material-boton span {
+
+    font-size: 20px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   TIPOS DE JOYAS PC
+========================================================= */
+
+.tipos-menu {
+
+    display: none;
+
+    padding:
+        3px 8px 8px;
+
+}
+
+
+.tipos-menu.activo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+}
+
+
+.tipos-menu button {
+
+    border: none;
+
+    background: transparent;
+
+    text-align: left;
+
+    padding:
+        7px 10px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+}
+
+
+.tipos-menu button:hover {
+
+    background:
+        #f5eeee;
+
+}
+
+
+/* =========================================================
+   VER TODOS
+========================================================= */
+
+.ver-todos-productos {
+
+    width: 100%;
+
+    margin-top: 7px;
+
+    padding:
+        10px;
+
+    border: none;
+
+    border-top:
+        1px solid #eee;
+
+    background: transparent;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.ver-todos-productos:hover {
+
+    background:
+        #f8eeee;
+
+}
+
+
+/* =========================================================
+   MENÚ LATERAL CELULAR
+========================================================= */
+
+.menu-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,0.4);
+
+    z-index: 2000;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.25s;
+
+}
+
+
+.menu-overlay.activo {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+.menu-lateral {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 82%;
+
+    max-width: 340px;
+
+    height: 100vh;
+
+    background: #fff;
+
+    z-index: 2100;
+
+    transform:
+        translateX(-100%);
+
+    transition:
+        transform 0.3s ease;
+
+    overflow-y: auto;
+
+    box-shadow:
+        5px 0 20px
+        rgba(0,0,0,0.15);
+
+}
+
+
+.menu-lateral.activo {
+
+    transform:
+        translateX(0);
+
+}
+
+
+/* =========================================================
+   CABECERA MENÚ CELULAR
+========================================================= */
+
+.menu-lateral-header {
+
+    height: 65px;
+
+    padding:
+        0 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background:
+        linear-gradient(
+            90deg,
+            #FFA8C0,
+            #FF764F
+        );
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+}
+
+
+.menu-lateral-header button {
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   BOTONES MENÚ CELULAR
+========================================================= */
+
+.menu-lateral-boton {
+
+    width: 100%;
+
+    border: none;
+
+    border-bottom:
+        1px solid #eee;
+
+    background: #fff;
+
+    padding:
+        15px 20px;
+
+    text-align: left;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.menu-lateral-boton:hover {
+
+    background:
+        #faf0f2;
+
+}
+
+
+/* =========================================================
+   PRODUCTOS CELULAR
+========================================================= */
+
+.submenu-productos-celu {
+
+    display: none;
+
+    background:
+        #fafafa;
+
+}
+
+
+.submenu-productos-celu.activo {
+
+    display: block;
+
+}
+
+
+/* =========================================================
+   MATERIAL CELULAR
+========================================================= */
+
+.material-boton-celu {
+
+    width: 100%;
+
+    border: none;
+
+    background:
+        #fafafa;
+
+    padding:
+        13px 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+}
+
+
+.material-boton-celu:hover {
+
+    background:
+        #f5eeee;
+
+}
+
+
+.material-boton-celu span {
+
+    font-size: 21px;
+
+}
+
+
+/* =========================================================
+   TIPOS CELULAR
+========================================================= */
+
+.tipos-menu-celu {
+
+    display: none;
+
+    padding:
+        3px 0 8px;
+
+    background:
+        #f5f5f5;
+
+}
+
+
+.tipos-menu-celu.activo {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.tipos-menu-celu button {
+
+    border: none;
+
+    background: transparent;
+
+    padding:
+        10px 45px;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+}
+
+
+.tipos-menu-celu button:hover {
+
+    background:
+        #eeeeee;
+
+}
+
+
+/* =========================================================
+   VER TODOS CELULAR
+========================================================= */
+
+.ver-todos-productos-celu {
+
+    width: 100%;
+
+    border: none;
+
+    border-top:
+        1px solid #ddd;
+
+    background:
+        #fafafa;
+
+    padding:
+        14px 30px;
+
+    text-align: left;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.ver-todos-productos-celu:hover {
+
+    background:
+        #f1f1f1;
+
+}
+
+
+/* =========================================================
+   IMAGEN PRINCIPAL
+========================================================= */
+
+.menu-imagen {
+
+    width: 100%;
+
+    height: 340px;
+
+    margin: 0;
+
+    padding: 0;
+
+    overflow: hidden;
+
+}
+
+
+.menu-imagen .fondo {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center center;
+
+}
+
+
+/* =========================================================
+   CATÁLOGO
+========================================================= */
+
+.catalogo {
+
+    width: 92%;
+
+    max-width: 1200px;
+
+    margin:
+        35px auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(210px, 1fr)
+        );
+
+    gap: 25px;
+
+}
+
+
+/* =========================================================
+   PRODUCTO
+========================================================= */
+
+.producto {
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius: 15px;
+
+    padding: 15px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.12);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+.producto > img {
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+}
+
+
+.producto h2 {
+
+    width: 100%;
+
+    margin:
+        12px 0 7px;
+
+    font-size: 17px;
+
+    text-align: center;
+
+}
+
+
+/* =========================================================
+   PRECIOS
+========================================================= */
+
+.precio-producto {
+
+    width: 100%;
+
+    text-align: center;
+
+    margin-bottom: 12px;
+
+}
+
+
+.precio-fila {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+}
+
+
+.precio-original {
+
+    color: #888;
+
+    text-decoration:
+        line-through;
+
+    font-size: 13px;
+
+}
+
+
+.descuento {
+
+    background:
+        #f56d6d;
+
+    color: #000;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    padding:
+        3px 6px;
+
+    border-radius: 5px;
+
+}
+
+
+.precio-final {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-top: 3px;
+
+}
+
+
+/* =========================================================
+   BOTÓN VER MÁS
+========================================================= */
+
+.boton {
+
+    width: 100%;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    background:
+        #222;
+
+    color: #fff;
+
+    padding:
+        10px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+
+}
+
+
+.boton:hover {
+
+    transform:
+        translateY(-2px);
+
+    opacity: 0.9;
+
+}
+
+
+/* =========================================================
+   BOTÓN SELECCIÓN
+========================================================= */
+
+.boton-seleccion {
+
+    width: 100%;
+
+    border: none;
+
+    background:
+        #FFA8C0;
+
+    color: #000;
+
+    padding:
+        10px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+
+}
+
+
+.boton-seleccion:hover {
+
+    transform:
+        translateY(-2px);
+
+    opacity: 0.9;
+
+}
+
+
+.boton-seleccion.producto-anadido {
+
+    background:
+        #d9f0df;
+
+    color:
+        #256b38;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE CELULAR
+========================================================= */
+
+@media (max-width: 700px) {
+
+
+    /* -------------------------------------------------------
+       HEADER
+    ------------------------------------------------------- */
+
+    .header {
+
+        height: 62px;
+
+        padding:
+            7px 12px;
+
+    }
+
+
+    .boton-menu-celu {
+
+        display: block;
+
+    }
+
+
+    .logo-container {
+
+        position: absolute;
+
+        left: 50%;
+
+        transform:
+            translateX(-50%);
+
+    }
+
+
+    .logo-img {
+
+        height: 38px;
+
+    }
+
+
+    .logo-text {
+
+        font-size: 25px;
+
+    }
+
+
+    .contacto {
+
+        display: none;
+
+    }
+
+
+    .boton-carrito {
+
+        margin-left: auto;
+
+    }
+
+
+    .boton-carrito img {
+
+        width: 31px;
+
+        height: 31px;
+
+    }
+
+
+    /* -------------------------------------------------------
+       MENÚ PC OCULTO
+    ------------------------------------------------------- */
+
+    .menu-principal {
+
+        display: none;
+
+    }
+
+
+    /* -------------------------------------------------------
+       IMAGEN PRINCIPAL CELULAR
+    ------------------------------------------------------- */
+
+    .menu-imagen {
+
+        width: 100%;
+
+        height: 170px;
+
+        margin: 0;
+
+        padding: 0;
+
+        overflow: hidden;
+
+    }
+
+
+    .menu-imagen .fondo {
+
+        display: block;
+
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+
+        object-position: center center;
+
+    }
+
+
+    /* -------------------------------------------------------
+       CATÁLOGO
+    ------------------------------------------------------- */
+
+    .catalogo {
+
+        width: 94%;
+
+        margin:
+            25px auto;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 12px;
+
+    }
+
+
+    /* -------------------------------------------------------
+       PRODUCTOS
+    ------------------------------------------------------- */
+
+    .producto {
+
+        padding: 10px;
+
+        border-radius: 12px;
+
+    }
+
+
+    .producto > img {
+
+        border-radius: 8px;
+
+    }
+
+
+    .producto h2 {
+
+        font-size: 14px;
+
+        margin:
+            9px 0 5px;
+
+    }
+
+
+    .precio-final {
+
+        font-size: 16px;
+
+    }
+
+
+    .precio-original {
+
+        font-size: 11px;
+
+    }
+
+
+    .descuento {
+
+        font-size: 10px;
+
+        padding:
+            2px 5px;
+
+    }
+
+
+    .boton {
+
+        font-size: 13px;
+
+        padding:
+            9px 5px;
+
+    }
+
+
+    .boton-seleccion {
+
+        font-size: 12px;
+
+        padding:
+            9px 5px;
+
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES MUY CHICOS
+========================================================= */
+
+@media (max-width: 380px) {
+
+
+    .menu-imagen {
+
+        height: 160px;
+
+    }
+
+
+    .catalogo {
+
+        gap: 9px;
+
+    }
+
+
+    .producto {
+
+        padding: 8px;
+
+    }
+
+
+    .producto h2 {
+
+        font-size: 13px;
+
+    }
+
+
+    .boton,
+    .boton-seleccion {
+
+        font-size: 11px;
+
+    }
+
+    /* =========================================================
+    MENSAJE SIN PRODUCTOS
+    ========================================================= */
+
+ .sin-productos {
+
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    text-align: center;
+
+    margin: 40px 0;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+}
+
+}
