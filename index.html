@@ -2,1952 +2,740 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo Lumira</title>
- 
-    <!-- LOGO EN LA PESTAÑA / VENTANA -->
+
+    <!-- LOGO EN LA PESTAÑA -->
     <link rel="icon" type="image/png" href="images/logo.png">
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
-
 
     <!-- =========================================================
          FONDO DESENFOCADO
     ========================================================== -->
-
     <div class="fondo-desenfocado"></div>
-
-
-
 
     <!-- =========================================================
          HEADER
     ========================================================== -->
-
     <header class="header">
 
-
         <!-- BOTÓN MENÚ CELULAR -->
-
         <button
             class="boton-menu-celu"
             id="boton-menu-celu"
             onclick="abrirMenu()"
             aria-label="Abrir menú"
         >
-
             ☰
-
         </button>
 
-
-
         <!-- LOGO -->
-
         <div class="logo-container">
-
             <img
                 src="images/logo.png"
                 alt="Logo Lumira"
                 class="logo-img"
             >
-
             <div class="logo-text">
                 Lumira
             </div>
-
         </div>
 
-
-
         <!-- INSTAGRAM -->
-
         <div class="contacto">
-
             <a
                 href="https://www.instagram.com/lumira.joyas/"
                 target="_blank"
             >
                 Instagram
             </a>
-
         </div>
 
-
-
         <!-- CARRITO -->
-
         <button
             class="boton-carrito"
             onclick="abrirCarrito()"
             aria-label="Abrir selección"
         >
-
             <img
                 src="images/carrito.png"
                 alt="Carrito"
             >
-
             <span
                 id="contador-carrito"
                 class="contador-carrito"
             >
                 0
             </span>
-
         </button>
 
-
     </header>
-
-
-
 
     <!-- =========================================================
          MENÚ PRINCIPAL - PC
     ========================================================== -->
-
-    <nav
-        class="menu-principal"
-        id="menu-principal"
-    >
-
+    <nav class="menu-principal" id="menu-principal">
 
         <!-- INICIO -->
-
-        <button
-            class="menu-principal-boton"
-            onclick="mostrarSeccion('todos')"
-        >
-
+        <button class="menu-principal-boton" onclick="mostrarSeccion('todos')">
             Inicio
-
         </button>
 
-
-
         <!-- PRODUCTOS -->
-
         <div class="menu-dropdown">
-
-
             <button
                 class="menu-principal-boton menu-productos-boton"
                 onclick="toggleProductos()"
             >
-
-                Productos
-                <span class="flecha-menu">⤵</span>
-
+                Productos <span class="flecha-menu">⤵</span>
             </button>
 
+            <!-- SUBMENÚ PRODUCTOS -->
+            <div class="submenu-productos" id="submenu-productos">
 
-
-            <!-- CONTENIDO PRODUCTOS -->
-
-            <div
-                class="submenu-productos"
-                id="submenu-productos"
-            >
-
-
-                <!-- =================================================
-                     ACERO BLANCO
-                ================================================== -->
-
+                <!-- ACERO BLANCO -->
                 <div class="material-menu">
-
-
-                    <button
-                        class="material-boton"
-                        onclick="toggleMaterial('acero-blanco')"
-                    >
-
-                        Acero Blanco
-
-                        <span>
-                            ›
-                        </span>
-
+                    <button class="material-boton" onclick="toggleMaterial('acero-blanco')">
+                        Acero Blanco <span>›</span>
                     </button>
-
-
-
-                    <div
-                        class="tipos-menu"
-                        id="tipos-acero-blanco"
-                    >
-
-                        <button
-                            onclick="filtrarTipo('acero-blanco', 'aros')"
-                        >
-                            Aros
+                    <div class="tipos-menu" id="tipos-acero-blanco">
+                        <button class="btn-ver-todo-cat" onclick="filtrarMaterial('acero-blanco')">
+                            • Ver todo Acero Blanco
                         </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-blanco', 'abridores')"
-                        >
-                            Abridores
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-blanco', 'pulseras')"
-                        >
-                            Pulseras
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-blanco', 'anillos')"
-                        >
-                            Anillos
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-blanco', 'collares')"
-                        >
-                            Collares
-                        </button>
-
+                        <button onclick="filtrarTipo('acero-blanco', 'aros')">Aros</button>
+                        <button onclick="filtrarTipo('acero-blanco', 'abridores')">Abridores</button>
+                        <button onclick="filtrarTipo('acero-blanco', 'pulseras')">Pulseras</button>
+                        <button onclick="filtrarTipo('acero-blanco', 'anillos')">Anillos</button>
+                        <button onclick="filtrarTipo('acero-blanco', 'collares')">Collares</button>
                     </div>
-
                 </div>
 
-
-
-
-                <!-- =================================================
-                     ACERO DORADO
-                ================================================== -->
-
+                <!-- ACERO DORADO -->
                 <div class="material-menu">
-
-
-                    <button
-                        class="material-boton"
-                        onclick="toggleMaterial('acero-dorado')"
-                    >
-
-                        Acero Dorado
-
-                        <span>
-                            ›
-                        </span>
-
+                    <button class="material-boton" onclick="toggleMaterial('acero-dorado')">
+                        Acero Dorado <span>›</span>
                     </button>
-
-
-
-                    <div
-                        class="tipos-menu"
-                        id="tipos-acero-dorado"
-                    >
-
-                        <button
-                            onclick="filtrarTipo('acero-dorado', 'aros')"
-                        >
-                            Aros
+                    <div class="tipos-menu" id="tipos-acero-dorado">
+                        <button class="btn-ver-todo-cat" onclick="filtrarMaterial('acero-dorado')">
+                            • Ver todo Acero Dorado
                         </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-dorado', 'abridores')"
-                        >
-                            Abridores
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-dorado', 'pulseras')"
-                        >
-                            Pulseras
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-dorado', 'anillos')"
-                        >
-                            Anillos
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-dorado', 'collares')"
-                        >
-                            Collares
-                        </button>
-
+                        <button onclick="filtrarTipo('acero-dorado', 'aros')">Aros</button>
+                        <button onclick="filtrarTipo('acero-dorado', 'abridores')">Abridores</button>
+                        <button onclick="filtrarTipo('acero-dorado', 'pulseras')">Pulseras</button>
+                        <button onclick="filtrarTipo('acero-dorado', 'anillos')">Anillos</button>
+                        <button onclick="filtrarTipo('acero-dorado', 'collares')">Collares</button>
                     </div>
-
                 </div>
 
-
-
-
-                <!-- =================================================
-                     ACERO QUIRÚRGICO
-                ================================================== -->
-
+                <!-- ACERO QUIRÚRGICO -->
                 <div class="material-menu">
-
-
-                    <button
-                        class="material-boton"
-                        onclick="toggleMaterial('acero-quirurgico')"
-                    >
-
-                        Acero Quirúrgico
-
-                        <span>
-                            ›
-                        </span>
-
+                    <button class="material-boton" onclick="toggleMaterial('acero-quirurgico')">
+                        Acero Quirúrgico <span>›</span>
                     </button>
-
-
-
-                    <div
-                        class="tipos-menu"
-                        id="tipos-acero-quirurgico"
-                    >
-
-                        <button
-                            onclick="filtrarTipo('acero-quirurgico', 'aros')"
-                        >
-                            Aros
+                    <div class="tipos-menu" id="tipos-acero-quirurgico">
+                        <button class="btn-ver-todo-cat" onclick="filtrarMaterial('acero-quirurgico')">
+                            • Ver todo Acero Quirúrgico
                         </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-quirurgico', 'abridores')"
-                        >
-                            Abridores
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-quirurgico', 'pulseras')"
-                        >
-                            Pulseras
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-quirurgico', 'anillos')"
-                        >
-                            Anillos
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('acero-quirurgico', 'collares')"
-                        >
-                            Collares
-                        </button>
-
+                        <button onclick="filtrarTipo('acero-quirurgico', 'aros')">Aros</button>
+                        <button onclick="filtrarTipo('acero-quirurgico', 'abridores')">Abridores</button>
+                        <button onclick="filtrarTipo('acero-quirurgico', 'pulseras')">Pulseras</button>
+                        <button onclick="filtrarTipo('acero-quirurgico', 'anillos')">Anillos</button>
+                        <button onclick="filtrarTipo('acero-quirurgico', 'collares')">Collares</button>
                     </div>
-
                 </div>
 
-
-
-
-                <!-- =================================================
-                     PLATA
-                ================================================== -->
-
+                <!-- PLATA -->
                 <div class="material-menu">
-
-
-                    <button
-                        class="material-boton"
-                        onclick="toggleMaterial('plata')"
-                    >
-
-                        Plata
-
-                        <span>
-                            ›
-                        </span>
-
+                    <button class="material-boton" onclick="toggleMaterial('plata')">
+                        Plata <span>›</span>
                     </button>
-
-
-
-                    <div
-                        class="tipos-menu"
-                        id="tipos-plata"
-                    >
-
-                        <button
-                            onclick="filtrarTipo('plata', 'aros')"
-                        >
-                            Aros
+                    <div class="tipos-menu" id="tipos-plata">
+                        <button class="btn-ver-todo-cat" onclick="filtrarMaterial('plata')">
+                            • Ver todo Plata
                         </button>
-
-                        <button
-                            onclick="filtrarTipo('plata', 'abridores')"
-                        >
-                            Abridores
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('plata', 'pulseras')"
-                        >
-                            Pulseras
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('plata', 'anillos')"
-                        >
-                            Anillos
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('plata', 'collares')"
-                        >
-                            Collares
-                        </button>
-
+                        <button onclick="filtrarTipo('plata', 'aros')">Aros</button>
+                        <button onclick="filtrarTipo('plata', 'abridores')">Abridores</button>
+                        <button onclick="filtrarTipo('plata', 'pulseras')">Pulseras</button>
+                        <button onclick="filtrarTipo('plata', 'anillos')">Anillos</button>
+                        <button onclick="filtrarTipo('plata', 'collares')">Collares</button>
                     </div>
-
                 </div>
 
-
-
-
-                <!-- =================================================
-                     LAMINADO EN PLATA
-                ================================================== -->
-
+                <!-- LAMINADO EN PLATA -->
                 <div class="material-menu">
-
-
-                    <button
-                        class="material-boton"
-                        onclick="toggleMaterial('laminado-plata')"
-                    >
-
-                        Laminado en Plata
-
-                        <span>
-                            ›
-                        </span>
-
+                    <button class="material-boton" onclick="toggleMaterial('laminado-plata')">
+                        Laminado en Plata <span>›</span>
                     </button>
-
-
-
-                    <div
-                        class="tipos-menu"
-                        id="tipos-laminado-plata"
-                    >
-
-                        <button
-                            onclick="filtrarTipo('laminado-plata', 'aros')"
-                        >
-                            Aros
+                    <div class="tipos-menu" id="tipos-laminado-plata">
+                        <button class="btn-ver-todo-cat" onclick="filtrarMaterial('laminado-plata')">
+                            • Ver todo Laminado en Plata
                         </button>
-
-                        <button
-                            onclick="filtrarTipo('laminado-plata', 'abridores')"
-                        >
-                            Abridores
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('laminado-plata', 'pulseras')"
-                        >
-                            Pulseras
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('laminado-plata', 'anillos')"
-                        >
-                            Anillos
-                        </button>
-
-                        <button
-                            onclick="filtrarTipo('laminado-plata', 'collares')"
-                        >
-                            Collares
-                        </button>
-
+                        <button onclick="filtrarTipo('laminado-plata', 'aros')">Aros</button>
+                        <button onclick="filtrarTipo('laminado-plata', 'abridores')">Abridores</button>
+                        <button onclick="filtrarTipo('laminado-plata', 'pulseras')">Pulseras</button>
+                        <button onclick="filtrarTipo('laminado-plata', 'anillos')">Anillos</button>
+                        <button onclick="filtrarTipo('laminado-plata', 'collares')">Collares</button>
                     </div>
-
                 </div>
-
-
-
 
                 <!-- VER TODOS -->
-
-                <button
-                    class="ver-todos-productos"
-                    onclick="mostrarSeccion('todos')"
-                >
-
+                <button class="ver-todos-productos" onclick="mostrarSeccion('todos')">
                     Ver todos los productos
-
                 </button>
 
-
             </div>
-
         </div>
 
-
-
-
         <!-- MATERIALES Y CUIDADOS -->
-
-        <button
-            class="menu-principal-boton"
-            onclick="mostrarCuidados()"
-        >
-
+        <button class="menu-principal-boton" onclick="mostrarCuidados()">
             Materiales y cuidados
-
         </button>
 
-
     </nav>
-
-
-
 
     <!-- =========================================================
          MENÚ LATERAL - CELULAR
     ========================================================== -->
+    <div class="menu-overlay" id="menu-overlay" onclick="cerrarMenu()"></div>
 
-    <div
-        class="menu-overlay"
-        id="menu-overlay"
-        onclick="cerrarMenu()"
-    >
-    </div>
-
-
-
-    <aside
-        class="menu-lateral"
-        id="menu-lateral"
-    >
-
-
-        <!-- CABECERA -->
+    <aside class="menu-lateral" id="menu-lateral">
 
         <div class="menu-lateral-header">
-
-            <span>
-                Menú
-            </span>
-
-            <button
-                onclick="cerrarMenu()"
-                aria-label="Cerrar menú"
-            >
-                ×
-            </button>
-
+            <span>Menú</span>
+            <button onclick="cerrarMenu()" aria-label="Cerrar menú">×</button>
         </div>
 
-
-
-
-        <!-- INICIO -->
-
-        <button
-            class="menu-lateral-boton"
-            onclick="
-                mostrarSeccion('todos');
-                cerrarMenu();
-            "
-        >
-
+        <button class="menu-lateral-boton" onclick="mostrarSeccion('todos'); cerrarMenu();">
             Inicio
-
         </button>
 
-
-
-
-        <!-- PRODUCTOS -->
-
-        <button
-            class="menu-lateral-boton"
-            onclick="toggleProductosCelu()"
-        >
-
-            Productos
-
-            <span>
-                ⌄
-            </span>
-
+        <button class="menu-lateral-boton" onclick="toggleProductosCelu()">
+            Productos <span>⌄</span>
         </button>
 
-
-
-        <div
-            class="submenu-productos-celu"
-            id="submenu-productos-celu"
-        >
-
+        <div class="submenu-productos-celu" id="submenu-productos-celu">
 
             <!-- ACERO BLANCO -->
-
-            <button
-                class="material-boton-celu"
-                onclick="toggleMaterialCelu('acero-blanco')"
-            >
-
-                Acero Blanco
-
-                <span>
-                    ›
-                </span>
-
+            <button class="material-boton-celu" onclick="toggleMaterialCelu('acero-blanco')">
+                Acero Blanco <span>›</span>
             </button>
-
-
-            <div
-                class="tipos-menu-celu"
-                id="tipos-celu-acero-blanco"
-            >
-
-                <button
-                    onclick="filtrarTipoCelu('acero-blanco', 'aros')"
-                >
-                    Aros
+            <div class="tipos-menu-celu" id="tipos-celu-acero-blanco">
+                <button class="btn-ver-todo-cat-celu" onclick="filtrarMaterial('acero-blanco'); cerrarMenu();">
+                    • Ver todo Acero Blanco
                 </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-blanco', 'abridores')"
-                >
-                    Abridores
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-blanco', 'pulseras')"
-                >
-                    Pulseras
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-blanco', 'anillos')"
-                >
-                    Anillos
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-blanco', 'collares')"
-                >
-                    Collares
-                </button>
-
+                <button onclick="filtrarTipoCelu('acero-blanco', 'aros')">Aros</button>
+                <button onclick="filtrarTipoCelu('acero-blanco', 'abridores')">Abridores</button>
+                <button onclick="filtrarTipoCelu('acero-blanco', 'pulseras')">Pulseras</button>
+                <button onclick="filtrarTipoCelu('acero-blanco', 'anillos')">Anillos</button>
+                <button onclick="filtrarTipoCelu('acero-blanco', 'collares')">Collares</button>
             </div>
-
-
-
 
             <!-- ACERO DORADO -->
-
-            <button
-                class="material-boton-celu"
-                onclick="toggleMaterialCelu('acero-dorado')"
-            >
-
-                Acero Dorado
-
-                <span>
-                    ›
-                </span>
-
+            <button class="material-boton-celu" onclick="toggleMaterialCelu('acero-dorado')">
+                Acero Dorado <span>›</span>
             </button>
-
-
-            <div
-                class="tipos-menu-celu"
-                id="tipos-celu-acero-dorado"
-            >
-
-                <button
-                    onclick="filtrarTipoCelu('acero-dorado', 'aros')"
-                >
-                    Aros
+            <div class="tipos-menu-celu" id="tipos-celu-acero-dorado">
+                <button class="btn-ver-todo-cat-celu" onclick="filtrarMaterial('acero-dorado'); cerrarMenu();">
+                    • Ver todo Acero Dorado
                 </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-dorado', 'abridores')"
-                >
-                    Abridores
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-dorado', 'pulseras')"
-                >
-                    Pulseras
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-dorado', 'anillos')"
-                >
-                    Anillos
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-dorado', 'collares')"
-                >
-                    Collares
-                </button>
-
+                <button onclick="filtrarTipoCelu('acero-dorado', 'aros')">Aros</button>
+                <button onclick="filtrarTipoCelu('acero-dorado', 'abridores')">Abridores</button>
+                <button onclick="filtrarTipoCelu('acero-dorado', 'pulseras')">Pulseras</button>
+                <button onclick="filtrarTipoCelu('acero-dorado', 'anillos')">Anillos</button>
+                <button onclick="filtrarTipoCelu('acero-dorado', 'collares')">Collares</button>
             </div>
-
-
-
 
             <!-- ACERO QUIRÚRGICO -->
-
-            <button
-                class="material-boton-celu"
-                onclick="toggleMaterialCelu('acero-quirurgico')"
-            >
-
-                Acero Quirúrgico
-
-                <span>
-                    ›
-                </span>
-
+            <button class="material-boton-celu" onclick="toggleMaterialCelu('acero-quirurgico')">
+                Acero Quirúrgico <span>›</span>
             </button>
-
-
-            <div
-                class="tipos-menu-celu"
-                id="tipos-celu-acero-quirurgico"
-            >
-
-                <button
-                    onclick="filtrarTipoCelu('acero-quirurgico', 'aros')"
-                >
-                    Aros
+            <div class="tipos-menu-celu" id="tipos-celu-acero-quirurgico">
+                <button class="btn-ver-todo-cat-celu" onclick="filtrarMaterial('acero-quirurgico'); cerrarMenu();">
+                    • Ver todo Acero Quirúrgico
                 </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-quirurgico', 'abridores')"
-                >
-                    Abridores
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-quirurgico', 'pulseras')"
-                >
-                    Pulseras
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-quirurgico', 'anillos')"
-                >
-                    Anillos
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('acero-quirurgico', 'collares')"
-                >
-                    Collares
-                </button>
-
+                <button onclick="filtrarTipoCelu('acero-quirurgico', 'aros')">Aros</button>
+                <button onclick="filtrarTipoCelu('acero-quirurgico', 'abridores')">Abridores</button>
+                <button onclick="filtrarTipoCelu('acero-quirurgico', 'pulseras')">Pulseras</button>
+                <button onclick="filtrarTipoCelu('acero-quirurgico', 'anillos')">Anillos</button>
+                <button onclick="filtrarTipoCelu('acero-quirurgico', 'collares')">Collares</button>
             </div>
-
-
-
 
             <!-- PLATA -->
-
-            <button
-                class="material-boton-celu"
-                onclick="toggleMaterialCelu('plata')"
-            >
-
-                Plata
-
-                <span>
-                    ›
-                </span>
-
+            <button class="material-boton-celu" onclick="toggleMaterialCelu('plata')">
+                Plata <span>›</span>
             </button>
-
-
-            <div
-                class="tipos-menu-celu"
-                id="tipos-celu-plata"
-            >
-
-                <button
-                    onclick="filtrarTipoCelu('plata', 'aros')"
-                >
-                    Aros
+            <div class="tipos-menu-celu" id="tipos-celu-plata">
+                <button class="btn-ver-todo-cat-celu" onclick="filtrarMaterial('plata'); cerrarMenu();">
+                    • Ver todo Plata
                 </button>
-
-                <button
-                    onclick="filtrarTipoCelu('plata', 'abridores')"
-                >
-                    Abridores
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('plata', 'pulseras')"
-                >
-                    Pulseras
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('plata', 'anillos')"
-                >
-                    Anillos
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('plata', 'collares')"
-                >
-                    Collares
-                </button>
-
+                <button onclick="filtrarTipoCelu('plata', 'aros')">Aros</button>
+                <button onclick="filtrarTipoCelu('plata', 'abridores')">Abridores</button>
+                <button onclick="filtrarTipoCelu('plata', 'pulseras')">Pulseras</button>
+                <button onclick="filtrarTipoCelu('plata', 'anillos')">Anillos</button>
+                <button onclick="filtrarTipoCelu('plata', 'collares')">Collares</button>
             </div>
-
-
-
 
             <!-- LAMINADO EN PLATA -->
-
-            <button
-                class="material-boton-celu"
-                onclick="toggleMaterialCelu('laminado-plata')"
-            >
-
-                Laminado en Plata
-
-                <span>
-                    ›
-                </span>
-
+            <button class="material-boton-celu" onclick="toggleMaterialCelu('laminado-plata')">
+                Laminado en Plata <span>›</span>
             </button>
-
-
-            <div
-                class="tipos-menu-celu"
-                id="tipos-celu-laminado-plata"
-            >
-
-                <button
-                    onclick="filtrarTipoCelu('laminado-plata', 'aros')"
-                >
-                    Aros
+            <div class="tipos-menu-celu" id="tipos-celu-laminado-plata">
+                <button class="btn-ver-todo-cat-celu" onclick="filtrarMaterial('laminado-plata'); cerrarMenu();">
+                    • Ver todo Laminado en Plata
                 </button>
-
-                <button
-                    onclick="filtrarTipoCelu('laminado-plata', 'abridores')"
-                >
-                    Abridores
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('laminado-plata', 'pulseras')"
-                >
-                    Pulseras
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('laminado-plata', 'anillos')"
-                >
-                    Anillos
-                </button>
-
-                <button
-                    onclick="filtrarTipoCelu('laminado-plata', 'collares')"
-                >
-                    Collares
-                </button>
-
+                <button onclick="filtrarTipoCelu('laminado-plata', 'aros')">Aros</button>
+                <button onclick="filtrarTipoCelu('laminado-plata', 'abridores')">Abridores</button>
+                <button onclick="filtrarTipoCelu('laminado-plata', 'pulseras')">Pulseras</button>
+                <button onclick="filtrarTipoCelu('laminado-plata', 'anillos')">Anillos</button>
+                <button onclick="filtrarTipoCelu('laminado-plata', 'collares')">Collares</button>
             </div>
-
 
             <button
                 class="ver-todos-productos-celu"
-                onclick="
-                    mostrarSeccion('todos');
-                    cerrarMenu();
-                "
+                onclick="mostrarSeccion('todos'); cerrarMenu();"
             >
-
                 Ver todos los productos
-
             </button>
 
         </div>
 
-
-
-
-        <!-- MATERIALES Y CUIDADOS -->
-
-        <button
-            class="menu-lateral-boton"
-            onclick="
-                mostrarCuidados();
-                cerrarMenu();
-            "
-        >
-
+        <button class="menu-lateral-boton" onclick="mostrarCuidados(); cerrarMenu();">
             Materiales y cuidados
-
         </button>
 
-
     </aside>
-
-
-
 
     <!-- =========================================================
          IMAGEN PRINCIPAL
     ========================================================== -->
-
     <div class="menu-imagen">
-
         <img
             src="images/fondo.png"
             alt="Lumira Joyas"
             class="fondo"
         >
-
     </div>
-
-
-
 
     <!-- =========================================================
          CATÁLOGO
     ========================================================== -->
-
-    <main
-        class="catalogo"
-        id="catalogo"
-    >
-
+    <main class="catalogo" id="catalogo">
         <!-- Los productos se cargarán automáticamente -->
-
     </main>
 
+    <!-- =========================================================
+         MODAL GUÍA DE CUIDADOS
+    ========================================================== -->
+    <div class="modal-cuidados-overlay" id="modal-cuidados">
+        <div class="modal-cuidados-caja">
+            
+            <button class="modal-cuidados-cerrar" onclick="cerrarCuidados()" aria-label="Cerrar">×</button>
 
+            <h2 class="cuidados-titulo-principal">Guía de Cuidado de Joyas</h2>
 
+            <p class="cuidados-intro">
+                Para que tus piezas mantengan su brillo y color original por mucho más tiempo, te recomendamos seguir estas pautas de uso y mantenimiento según el material:
+            </p>
+
+            <div class="cuidados-seccion">
+                <h3 class="cuidados-seccion-titulo">RECOMENDACIONES GENERALES</h3>
+
+                <div class="cuidados-item">
+                    <h4>EVITÁ EL CONTACTO CON QUÍMICOS</h4>
+                    <p>⤷ Colocate perfumes, cremas, lociones corporales y fijador de pelo antes de ponerte las joyas y dejá que la piel absorba el producto primero.</p>
+                </div>
+
+                <div class="cuidados-item">
+                    <h4>CUIDADO CON EL AGUA</h4>
+                    <p>⤷ Retirate los accesorios antes de ducharte, ingresar a la piscina (el cloro deteriora los acabados) o al mar (la salinidad es corrosiva).</p>
+                </div>
+
+                <div class="cuidados-item">
+                    <h4>GUARDADO INDIVIDUAL</h4>
+                    <p>⤷ Guardá cada pieza por separado en bolsitas de tela, sobres herméticos tipo ziploc o alhajeros con compartimentos para evitar fricción, rayones y enredos.</p>
+                </div>
+
+                <div class="cuidados-item">
+                    <h4>ACTIVIDAD FÍSICA</h4>
+                    <p>⤷ No uses las joyas para hacer deporte; el sudor y el pH de la piel pueden acelerar el desgaste de los recubrimientos.</p>
+                </div>
+            </div>
+
+            <div class="cuidados-seccion">
+                <h3 class="cuidados-seccion-titulo">CUIDADOS ESPECÍFICOS POR MATERIAL</h3>
+
+                <div class="cuidados-item">
+                    <h4>ACERO QUIRÚRGICO 316L</h4>
+                    <p>⤷ Es el material más resistente, inoxidable e hipoalergénico. No se oxida ni pierde su color con el agua. Podés lavarlo periódicamente con agua tibia y jabón neutro, secándolo bien con un paño suave.</p>
+                </div>
+
+                <div class="cuidados-item">
+                    <h4>ACERO BLANCO Y ACERO DORADO</h4>
+                    <p>⤷ Al tener una base de acero con un baño de color (plateado o dorado), requieren un trato delicado para no desgastar la capa superficial. Evitá totalmente el agua, el roce constante contra superficies duras y los productos abrasivos.</p>
+                </div>
+
+                <div class="cuidados-item">
+                    <h4>LAMINADO EN PLATA / PLATA 925</h4>
+                    <p>⤷ La plata reacciona de forma natural con el azufre del ambiente y el pH corporal, lo que puede oscurecerla con el tiempo. Esto no significa que esté arruinada: basta con frotarla suavemente con un paño de pulido seco para joyas o microfibra limpia para devolverle su brillo. Mantenelas siempre protegidas del aire y la humedad directa cuando no las uses.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <!-- =========================================================
          JAVASCRIPT
     ========================================================== -->
-
     <script>
 
-
         /* ========================================================
-           SUPABASE
+           SUPABASE CONFIG
         ======================================================== */
-
-        const SUPABASE_URL =
-            "https://fnpxfmdgilsuipwyrkzs.supabase.co";
-
-
-        const SUPABASE_KEY =
-            "sb_publishable_K-2L2v84e3yEme6vSFzbAw_E8MiIpHr";
-
-
-
+        const SUPABASE_URL = "https://fnpxfmdgilsuipwyrkzs.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_K-2L2v84e3yEme6vSFzbAw_E8MiIpHr";
 
         /* ========================================================
            VARIABLES
         ======================================================== */
-
         let todosLosProductos = [];
-
         let carrito = [];
 
-
-
-
         /* ========================================================
-           MENÚ PRINCIPAL
+           MENÚ PRINCIPAL (PC)
         ======================================================== */
-
         function toggleProductos() {
-
-            const submenu =
-                document.getElementById(
-                    "submenu-productos"
-                );
-
-            submenu.classList.toggle(
-                "activo"
-            );
-
+            const submenu = document.getElementById("submenu-productos");
+            submenu.classList.toggle("activo");
         }
 
-
-
-
-        /* ========================================================
-           ABRIR / CERRAR MATERIAL EN PC
-        ======================================================== */
-
-        function toggleMaterial(
-            material
-        ) {
-
-            const tipos =
-                document.getElementById(
-                    "tipos-" + material
-                );
-
-
-            if (!tipos) {
-                return;
-            }
-
-
-            tipos.classList.toggle(
-                "activo"
-            );
-
+        function toggleMaterial(material) {
+            const tipos = document.getElementById("tipos-" + material);
+            if (tipos) tipos.classList.toggle("activo");
         }
-
-
-
-
-        /* ========================================================
-           FILTRAR POR MATERIAL + TIPO
-        ======================================================== */
-
-        function filtrarTipo(
-            material,
-            tipo
-        ) {
-
-            const productosFiltrados =
-                todosLosProductos.filter(
-                    producto => {
-
-                        return (
-                            producto.categoria === material &&
-                            producto.tipo === tipo
-                        );
-
-                    }
-                );
-
-
-            mostrarProductos(
-                productosFiltrados
-            );
-
-
-            document
-                .getElementById(
-                    "submenu-productos"
-                )
-                .classList.remove(
-                    "activo"
-                );
-
-        }
-
-
-
 
         /* ========================================================
            MENÚ CELULAR
         ======================================================== */
-
         function abrirMenu() {
-
-            document
-                .getElementById(
-                    "menu-lateral"
-                )
-                .classList.add(
-                    "activo"
-                );
-
-
-            document
-                .getElementById(
-                    "menu-overlay"
-                )
-                .classList.add(
-                    "activo"
-                );
-
+            document.getElementById("menu-lateral").classList.add("activo");
+            document.getElementById("menu-overlay").classList.add("activo");
         }
-
-
-
 
         function cerrarMenu() {
-
-            document
-                .getElementById(
-                    "menu-lateral"
-                )
-                .classList.remove(
-                    "activo"
-                );
-
-
-            document
-                .getElementById(
-                    "menu-overlay"
-                )
-                .classList.remove(
-                    "activo"
-                );
-
+            document.getElementById("menu-lateral").classList.remove("activo");
+            document.getElementById("menu-overlay").classList.remove("activo");
         }
-
-
-
-
-        /* ========================================================
-           PRODUCTOS EN CELULAR
-        ======================================================== */
 
         function toggleProductosCelu() {
-
-            const submenu =
-                document.getElementById(
-                    "submenu-productos-celu"
-                );
-
-
-            submenu.classList.toggle(
-                "activo"
-            );
-
+            document.getElementById("submenu-productos-celu").classList.toggle("activo");
         }
 
+        function toggleMaterialCelu(material) {
+            const tipos = document.getElementById("tipos-celu-" + material);
+            if (tipos) tipos.classList.toggle("activo");
+        }
 
-
+        function filtrarTipoCelu(material, tipo) {
+            filtrarTipo(material, tipo);
+            cerrarMenu();
+        }
 
         /* ========================================================
-           MATERIAL EN CELULAR
+           MODAL CUIDADOS
+        ======================================================== */
+        function mostrarCuidados() {
+            document.getElementById("modal-cuidados").classList.add("activo");
+        }
+
+        function cerrarCuidados() {
+            document.getElementById("modal-cuidados").classList.remove("activo");
+        }
+
+        document.getElementById("modal-cuidados").addEventListener("click", (e) => {
+            if (e.target === document.getElementById("modal-cuidados")) {
+                cerrarCuidados();
+            }
+        });
+
+        /* ========================================================
+           FILTRADO CON PERSISTENCIA EN URL
         ======================================================== */
 
-        function toggleMaterialCelu(
-            material
-        ) {
-
-            const tipos =
-                document.getElementById(
-                    "tipos-celu-" + material
-                );
-
-
-            if (!tipos) {
-                return;
+        // Filtrar por Material + Tipo (ej: Acero Dorado -> Pulseras)
+        function filtrarTipo(material, tipo, actualizarURL = true) {
+            if (actualizarURL) {
+                const url = new URL(window.location);
+                url.searchParams.set("material", material);
+                url.searchParams.set("tipo", tipo);
+                window.history.pushState({}, "", url);
             }
 
+            const productosFiltrados = todosLosProductos.filter(producto => {
+                const cat = (producto.categoria || producto.material || "").toLowerCase();
+                const tip = (producto.tipo || "").toLowerCase();
+                return cat === material.toLowerCase() && tip === tipo.toLowerCase();
+            });
 
-            tipos.classList.toggle(
-                "activo"
-            );
-
+            mostrarProductos(productosFiltrados);
+            const sub = document.getElementById("submenu-productos");
+            if (sub) sub.classList.remove("activo");
         }
 
+        // Filtrar solo por Material (ej: Ver todo Acero Dorado)
+        function filtrarMaterial(material, actualizarURL = true) {
+            if (actualizarURL) {
+                const url = new URL(window.location);
+                url.searchParams.set("material", material);
+                url.searchParams.delete("tipo");
+                window.history.pushState({}, "", url);
+            }
 
+            const productosFiltrados = todosLosProductos.filter(producto => {
+                const cat = (producto.categoria || producto.material || "").toLowerCase();
+                return cat === material.toLowerCase();
+            });
 
-
-        /* ========================================================
-           FILTRAR EN CELULAR
-        ======================================================== */
-
-        function filtrarTipoCelu(
-            material,
-            tipo
-        ) {
-
-            const productosFiltrados =
-                todosLosProductos.filter(
-                    producto => {
-
-                        return (
-                            producto.categoria === material &&
-                            producto.tipo === tipo
-                        );
-
-                    }
-                );
-
-
-            mostrarProductos(
-                productosFiltrados
-            );
-
-
-            cerrarMenu();
-
+            mostrarProductos(productosFiltrados);
+            const sub = document.getElementById("submenu-productos");
+            if (sub) sub.classList.remove("activo");
         }
 
+        // Mostrar Todos los productos
+        function mostrarSeccion(seccion, actualizarURL = true) {
+            if (actualizarURL) {
+                const url = new URL(window.location);
+                url.searchParams.delete("material");
+                url.searchParams.delete("tipo");
+                window.history.pushState({}, "", url);
+            }
 
-
-
-        /* ========================================================
-           MATERIALES Y CUIDADOS
-        ======================================================== */
-
-        function mostrarCuidados() {
-
-            alert(
-                "Próximamente vas a encontrar acá toda la información sobre nuestros materiales y los cuidados de tus joyas. 💕"
-            );
-
+            mostrarProductos(todosLosProductos);
+            const sub = document.getElementById("submenu-productos");
+            if (sub) sub.classList.remove("activo");
         }
 
+        // Leer la URL al cargar o al usar atrás/adelante del navegador
+        function aplicarFiltrosDesdeURL() {
+            const params = new URLSearchParams(window.location.search);
+            const material = params.get("material");
+            const tipo = params.get("tipo");
 
+            if (material && tipo) {
+                filtrarTipo(material, tipo, false);
+            } else if (material) {
+                filtrarMaterial(material, false);
+            } else {
+                mostrarProductos(todosLosProductos);
+            }
+        }
 
+        window.addEventListener("popstate", aplicarFiltrosDesdeURL);
 
         /* ========================================================
            MOSTRAR PRODUCTOS
         ======================================================== */
-
-        function mostrarProductos(
-            productos
-        ) {
-
-            const catalogo =
-                document.getElementById(
-                    "catalogo"
-                );
-
-
+        function mostrarProductos(productos) {
+            const catalogo = document.getElementById("catalogo");
             catalogo.innerHTML = "";
 
-
-
-            /* ----------------------------------------------------
-               SIN PRODUCTOS
-            ---------------------------------------------------- */
-
-            if (
-                productos.length === 0
-            ) {
-
+            if (!productos || productos.length === 0) {
                 catalogo.innerHTML = `
-
-                    <p class="sin-productos">
-                        No hay productos para mostrar.
+                    <p class="sin-productos" style="width:100%; text-align:center; padding:50px 20px; color:#777;">
+                        No hay productos disponibles en esta sección por el momento.
                     </p>
-
                 `;
-
                 return;
-
             }
 
-
-
-
-            /* ----------------------------------------------------
-               CREAR PRODUCTOS
-            ---------------------------------------------------- */
-
-            productos.forEach(
-                producto => {
-
-
-                    const tarjeta =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    tarjeta.classList.add(
-                        "producto",
-                        producto.categoria,
-                        producto.tipo
-                    );
-
-
-                    tarjeta.dataset.productoId =
-                        producto.id;
-
-
-
-
-                    /* =================================================
-                       IMAGEN
-                    ================================================= */
-
-                    const imagen =
-                        document.createElement(
-                            "img"
-                        );
-
-
-                    imagen.src =
-                        producto.imagen ||
-                        "images/sin-imagen.jpg";
-
-
-                    imagen.alt =
-                        producto.nombre;
-
-
-
-
-                    /* =================================================
-                       NOMBRE
-                    ================================================= */
-
-                    const nombre =
-                        document.createElement(
-                            "h2"
-                        );
-
-
-                    nombre.textContent =
-                        producto.nombre;
-
-
-
-
-                    /* =================================================
-                       PRECIOS
-                    ================================================= */
-
-                    const precio =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    precio.classList.add(
-                        "precio-producto"
-                    );
-
-
-                    const precioOriginal =
-                        Number(
-                            producto.precio
-                        );
-
-
-                    const descuento =
-                        Number(
-                            producto.descuento || 0
-                        );
-
-
-                    const precioFinal =
-                        precioOriginal *
-                        (
-                            1 -
-                            descuento / 100
-                        );
-
-
-
-
-                    if (
-                        descuento > 0
-                    ) {
-
-                        precio.innerHTML = `
-
-                            <div class="precio-fila">
-
-                                <span
-                                    class="precio-original"
-                                >
-                                    $${precioOriginal.toLocaleString("es-AR")}
-                                </span>
-
-                                <span
-                                    class="descuento"
-                                >
-                                    ${descuento}% OFF
-                                </span>
-
-                            </div>
-
-
-                            <div
-                                class="precio-final"
-                            >
-                                $${precioFinal.toLocaleString("es-AR")}
-                            </div>
-
-                        `;
-
-                    }
-
-                    else {
-
-                        precio.innerHTML = `
-
-                            <span
-                                class="precio-final"
-                            >
-                                $${precioOriginal.toLocaleString("es-AR")}
-                            </span>
-
-                        `;
-
-                    }
-
-
-
-
-                    /* =================================================
-                       BOTÓN VER MÁS
-                    ================================================= */
-
-                    const boton =
-                        document.createElement(
-                            "a"
-                        );
-
-
-                    boton.textContent =
-                        "Ver más";
-
-
-                    boton.classList.add(
-                        "boton"
-                    );
-
-
-                    boton.href =
-                        "producto.html?id=" +
-                        producto.id;
-
-
-
-
-                    /* =================================================
-                       BOTÓN AGREGAR
-                    ================================================= */
-
-                    const botonAgregar =
-                        document.createElement(
-                            "button"
-                        );
-
-
-                    botonAgregar.textContent =
-                        "Agregar a mi selección";
-
-
-                    botonAgregar.classList.add(
-                        "boton-seleccion"
-                    );
-
-
-
-
-                    /* =================================================
-                       STOCK
-                    ================================================= */
-
-                    const cantidadDisponible =
-                        Number(
-                            producto.cantidad_disponible || 0
-                        );
-
-
-
-
-                    /* =================================================
-                       ACTUALIZAR BOTÓN
-                    ================================================= */
-
-                    function actualizarBotonAgregar() {
-
-                        const existente =
-                            carrito.find(
-                                item =>
-                                    item.id ===
-                                    producto.id
-                            );
-
-
-                        if (
-                            cantidadDisponible === 1 &&
-                            existente
-                        ) {
-
-                            botonAgregar.textContent =
-                                "✓ Añadido";
-
-
-                            botonAgregar.classList.add(
-                                "producto-anadido"
-                            );
-
-                        }
-
-                        else {
-
-                            botonAgregar.textContent =
-                                "Agregar a mi selección";
-
-
-                            botonAgregar.classList.remove(
-                                "producto-anadido"
-                            );
-
-                        }
-
-                    }
-
-
-
-
-                    /* =================================================
-                       CLICK AGREGAR
-                    ================================================= */
-
-                    botonAgregar.addEventListener(
-                        "click",
-                        () => {
-
-                            const existente =
-                                carrito.find(
-                                    item =>
-                                        item.id ===
-                                        producto.id
-                                );
-
-
-                            if (
-                                existente
-                            ) {
-
-                                const confirmar =
-                                    confirm(
-
-                                        "Este producto ya está en tu selección.\n\n" +
-                                        "¿Querés agregar otra unidad?"
-
-                                    );
-
-
-                                if (
-                                    !confirmar
-                                ) {
-
-                                    return;
-
-                                }
-
-                            }
-
-
-                            agregarAlCarrito(
-                                producto
-                            );
-
-
-                            actualizarBotonAgregar();
-
-                        }
-                    );
-
-
-
-
-                    /* =================================================
-                       ESTADO INICIAL
-                    ================================================= */
-
-                    actualizarBotonAgregar();
-
-
-
-
-                    /* =================================================
-                       ARMAR TARJETA
-                    ================================================= */
-
-                    tarjeta.appendChild(
-                        imagen
-                    );
-
-
-                    tarjeta.appendChild(
-                        nombre
-                    );
-
-
-                    tarjeta.appendChild(
-                        precio
-                    );
-
-
-                    tarjeta.appendChild(
-                        boton
-                    );
-
-
-                    tarjeta.appendChild(
-                        botonAgregar
-                    );
-
-
-                    catalogo.appendChild(
-                        tarjeta
-                    );
-
+            productos.forEach(producto => {
+                const tarjeta = document.createElement("div");
+                tarjeta.classList.add(
+                    "producto",
+                    producto.categoria || "sin-categoria",
+                    producto.tipo || "sin-tipo"
+                );
+                tarjeta.dataset.productoId = producto.id;
+
+                // 1. Imagen
+                const imagen = document.createElement("img");
+                imagen.src = producto.imagen || "images/sin-imagen.jpg";
+                imagen.alt = producto.nombre || "Joya Lumira";
+
+                // 2. Nombre
+                const nombre = document.createElement("h2");
+                nombre.textContent = producto.nombre || "Sin nombre";
+
+                // 3. Precios y Descuento
+                const precioContenedor = document.createElement("div");
+                precioContenedor.classList.add("precio-producto");
+
+                const precioOriginal = Number(producto.precio || 0);
+                const descuento = Number(producto.descuento || 0);
+                const precioFinal = descuento > 0 ? precioOriginal * (1 - descuento / 100) : precioOriginal;
+
+                if (descuento > 0) {
+                    precioContenedor.innerHTML = `
+                        <div class="precio-fila">
+                            <span class="precio-original">$${precioOriginal.toLocaleString("es-AR")}</span>
+                            <span class="descuento">${descuento}% OFF</span>
+                        </div>
+                        <div class="precio-final">$${precioFinal.toLocaleString("es-AR")}</div>
+                    `;
+                } else {
+                    precioContenedor.innerHTML = `
+                        <span class="precio-final">$${precioOriginal.toLocaleString("es-AR")}</span>
+                    `;
                 }
-            );
 
+                // 4. Botón Ver Más
+                const boton = document.createElement("a");
+                boton.textContent = "Ver más";
+                boton.classList.add("boton");
+                boton.href = "producto.html?id=" + producto.id;
+
+                // 5. Botón Agregar
+                const botonAgregar = document.createElement("button");
+                botonAgregar.classList.add("boton-seleccion");
+                botonAgregar.type = "button";
+
+                const stock = Number(producto.cantidad_disponible ?? producto.stock ?? 0);
+
+                function actualizarBotonAgregar() {
+                    const existente = carrito.find(item => item.id === producto.id);
+                    if (existente) {
+                        botonAgregar.textContent = `✓ Añadido (${existente.cantidad})`;
+                        botonAgregar.classList.add("producto-anadido");
+                    } else {
+                        botonAgregar.textContent = "Agregar a mi selección";
+                        botonAgregar.classList.remove("producto-anadido");
+                    }
+                }
+
+                botonAgregar.addEventListener("click", () => {
+                    const existente = carrito.find(item => item.id === producto.id);
+
+                    if (existente) {
+                        if (existente.cantidad >= stock) {
+                            alert("Ya seleccionaste todas las unidades disponibles de este producto. 💕");
+                            return;
+                        }
+                    }
+
+                    agregarAlCarrito(producto);
+                    actualizarBotonAgregar();
+                });
+
+                actualizarBotonAgregar();
+
+                // Armar tarjeta
+                tarjeta.appendChild(imagen);
+                tarjeta.appendChild(nombre);
+                tarjeta.appendChild(precioContenedor);
+                tarjeta.appendChild(boton);
+                tarjeta.appendChild(botonAgregar);
+
+                catalogo.appendChild(tarjeta);
+            });
         }
-
-
-
-
-        /* ========================================================
-           MOSTRAR SECCIÓN
-        ======================================================== */
-
-        function mostrarSeccion(
-            seccion
-        ) {
-
-            if (
-                seccion === "todos"
-            ) {
-
-                mostrarProductos(
-                    todosLosProductos
-                );
-
-                return;
-
-            }
-
-
-            const productosFiltrados =
-                todosLosProductos.filter(
-                    producto =>
-                        producto.categoria ===
-                        seccion
-                );
-
-
-            mostrarProductos(
-                productosFiltrados
-            );
-
-        }
-
-
-
 
         /* ========================================================
            CARGAR PRODUCTOS DESDE SUPABASE
         ======================================================== */
-
         async function cargarProductos() {
-
             try {
-
-                const respuesta =
-                    await fetch(
-
-                        `${SUPABASE_URL}/rest/v1/productos?select=*`,
-
-                        {
-
-                            headers: {
-
-                                "apikey":
-                                    SUPABASE_KEY
-
-                            }
-
+                const respuesta = await fetch(
+                    `${SUPABASE_URL}/rest/v1/productos?select=*&order=id.desc`,
+                    {
+                        headers: {
+                            "apikey": SUPABASE_KEY
                         }
+                    }
+                );
 
-                    );
-
-
-                if (
-                    !respuesta.ok
-                ) {
-
-                    throw new Error(
-
-                        "Error al conectar con Supabase: " +
-                        respuesta.status
-
-                    );
-
+                if (!respuesta.ok) {
+                    throw new Error("Error al conectar con Supabase: " + respuesta.status);
                 }
 
+                const productos = await respuesta.json();
 
-                const productos =
-                    await respuesta.json();
-
-
-                console.log(
-                    "Productos recibidos:",
-                    productos
-                );
-
-
-
-                /* ------------------------------------------------
-                   SOLO PRODUCTOS CON STOCK
-                ------------------------------------------------ */
-
-                todosLosProductos =
-                    productos.filter(
-                        producto =>
-                            Number(
-                                producto.cantidad_disponible
-                            ) > 0
-                    );
-
-
-                mostrarProductos(
-                    todosLosProductos
-                );
-
-            }
-
-            catch (
-                error
-            ) {
-
-                console.error(
-                    "Error cargando productos:",
-                    error
-                );
-
-            }
-
-        }
-
-
-
-
-        /* ========================================================
-           AGREGAR AL CARRITO
-        ======================================================== */
-
-        function agregarAlCarrito(
-            producto
-        ) {
-
-            const existente =
-                carrito.find(
-                    item =>
-                        item.id ===
-                        producto.id
-                );
-
-
-            const cantidadDisponible =
-                Number(
-                    producto.cantidad_disponible || 0
-                );
-
-
-            if (
-                existente
-            ) {
-
-                if (
-                    existente.cantidad >=
-                    cantidadDisponible
-                ) {
-
-                    alert(
-                        "Ya seleccionaste todas las unidades disponibles de este producto. 💕"
-                    );
-
-                    return;
-
-                }
-
-
-                existente.cantidad++;
-
-            }
-
-            else {
-
-                if (
-                    cantidadDisponible <= 0
-                ) {
-
-                    alert(
-                        "Este producto ya no está disponible."
-                    );
-
-                    return;
-
-                }
-
-
-                carrito.push({
-
-                    ...producto,
-
-                    cantidad: 1
-
+                todosLosProductos = (productos || []).filter(producto => {
+                    const stock = Number(producto.cantidad_disponible ?? producto.stock ?? 0);
+                    return stock > 0;
                 });
 
-            }
+                // Aplicar filtros según la URL actual
+                aplicarFiltrosDesdeURL();
 
+            } catch (error) {
+                console.error("Error cargando productos:", error);
+                document.getElementById("catalogo").innerHTML = `
+                    <p class="sin-productos" style="width:100%; text-align:center; padding:50px 20px; color:#b33434;">
+                        No se pudieron cargar los productos. Por favor recargá la página.
+                    </p>
+                `;
+            }
+        }
+
+        /* ========================================================
+           MANEJO DE CARRITO
+        ======================================================== */
+        function agregarAlCarrito(producto) {
+            const stock = Number(producto.cantidad_disponible ?? producto.stock ?? 0);
+            const existente = carrito.find(item => item.id === producto.id);
+
+            if (existente) {
+                if (existente.cantidad >= stock) {
+                    alert("Ya seleccionaste todas las unidades disponibles. 💕");
+                    return;
+                }
+                existente.cantidad++;
+            } else {
+                carrito.push({
+                    ...producto,
+                    cantidad: 1
+                });
+            }
 
             actualizarCarrito();
-
         }
-
-
-
-
-        /* ========================================================
-           ACTUALIZAR CARRITO
-        ======================================================== */
 
         function actualizarCarrito() {
+            const contador = document.getElementById("contador-carrito");
+            const cantidad = carrito.reduce((total, p) => total + (p.cantidad || 1), 0);
+            if (contador) contador.textContent = cantidad;
 
-            const contador =
-                document.getElementById(
-                    "contador-carrito"
-                );
-
-
-            const cantidad =
-                carrito.reduce(
-                    (
-                        total,
-                        producto
-                    ) =>
-                        total +
-                        producto.cantidad,
-                    0
-                );
-
-
-            contador.textContent =
-                cantidad;
-
-
-            localStorage.setItem(
-                "lumiraCarrito",
-                JSON.stringify(
-                    carrito
-                )
-            );
-
+            localStorage.setItem("lumiraCarrito", JSON.stringify(carrito));
         }
-
-
-
-
-        /* ========================================================
-           ABRIR CARRITO
-        ======================================================== */
 
         function abrirCarrito() {
-
-            window.location.href =
-                "carrito.html";
-
+            window.location.href = "carrito.html";
         }
-
-
-
-
-        /* ========================================================
-           CERRAR CARRITO
-        ======================================================== */
-
-        function cerrarCarrito() {
-
-            window.location.href =
-                "index.html";
-
-        }
-
-
-
-
-        /* ========================================================
-           CARGAR CARRITO GUARDADO
-        ======================================================== */
 
         function cargarCarritoGuardado() {
-
-            const guardado =
-                localStorage.getItem(
-                    "lumiraCarrito"
-                );
-
-
-            if (
-                !guardado
-            ) {
-
+            const guardado = localStorage.getItem("lumiraCarrito");
+            if (!guardado) {
                 carrito = [];
-
                 return;
-
             }
-
-
             try {
-
-                carrito =
-                    JSON.parse(
-                        guardado
-                    );
-
-            }
-
-            catch (
-                error
-            ) {
-
+                carrito = JSON.parse(guardado) || [];
+            } catch (e) {
                 carrito = [];
-
             }
-
         }
 
-
-
-
         /* ========================================================
-           INICIAR
+           INICIALIZAR
         ======================================================== */
-
         cargarCarritoGuardado();
-
+        actualizarCarrito();
         cargarProductos();
 
-        actualizarCarrito();
-
-
     </script>
-
-
 </body>
-
 </html>
