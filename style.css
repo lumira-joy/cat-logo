@@ -42,7 +42,7 @@ body {
 }
 
 /* =========================================================
-   HEADER
+   HEADER (FIJO AL HACER SCROLL)
 ========================================================= */
 
 .header {
@@ -53,8 +53,10 @@ body {
     justify-content: space-between;
     padding: 10px 30px;
     background: linear-gradient(90deg, #FFA8C0, #FF764F);
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 /* =========================================================
