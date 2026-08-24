@@ -12,7 +12,7 @@ const WHATSAPP =
 
 
 const INSTAGRAM_DM =
-    "https://www.instagram.com/direct/t/17845489119540327/";
+    "https://www.instagram.com/lumira.joyas/";
 
 
 
