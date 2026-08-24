@@ -20,7 +20,7 @@
     <div class="fondo-desenfocado"></div>
 
     <!-- =========================================================
-         HEADER
+         HEADER (FIJO AL HACER SCROLL)
     ========================================================== -->
     <header class="header">
 
@@ -44,16 +44,6 @@
             <div class="logo-text">
                 Lumira
             </div>
-        </div>
-
-        <!-- INSTAGRAM -->
-        <div class="contacto">
-            <a
-                href="https://www.instagram.com/lumira.joyas/"
-                target="_blank"
-            >
-                Instagram
-            </a>
         </div>
 
         <!-- CARRITO -->
@@ -545,8 +535,8 @@
 
             if (!productos || productos.length === 0) {
                 catalogo.innerHTML = `
-                    <p class="sin-productos" style="width:100%; text-align:center; padding:50px 20px; color:#777;">
-                        No hay productos disponibles en esta sección por el momento.
+                    <p class="sin-productos">
+                        No hay productos para mostrar.
                     </p>
                 `;
                 return;
@@ -668,13 +658,12 @@
                     return stock > 0;
                 });
 
-                // Aplicar filtros según la URL actual
                 aplicarFiltrosDesdeURL();
 
             } catch (error) {
                 console.error("Error cargando productos:", error);
                 document.getElementById("catalogo").innerHTML = `
-                    <p class="sin-productos" style="width:100%; text-align:center; padding:50px 20px; color:#b33434;">
+                    <p class="sin-productos" style="color:#b33434;">
                         No se pudieron cargar los productos. Por favor recargá la página.
                     </p>
                 `;
