@@ -899,3 +899,62 @@ body {
         font-size: 11px;
     }
 }
+/* =========================================================
+   BOTONES GRANDES DE MATERIALES EN EL INICIO
+========================================================== */
+.contenedor-inicio-materiales {
+    width: 100%;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+.titulo-inicio-materiales {
+    font-size: 22px;
+    margin-ion: 25px;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+.grid-materiales-grandes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.btn-material-grande {
+    flex: 1 1 240px;
+    padding: 22px 15px;
+    font-size: 17px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    color: #333;
+    border: 2px solid #eaeaea;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    transition: all 0.2s ease;
+}
+
+.btn-material-grande:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    border-color: #d65a73;
+    color: #d65a73;
+}
+
+.btn-ver-todo-general {
+    background-color: #d65a73;
+    color: #ffffff;
+    border: none;
+    flex: 1 1 100%;
+    max-width: 350px;
+}
+
+.btn-ver-todo-general:hover {
+    background-color: #b33434;
+    color: #ffffff;
+}
