@@ -901,22 +901,18 @@ body {
 }
 
 /* =========================================================
-   BOTONES GRANDES DE MATERIALES EN EL INICIO (CENTRADOS Y COLOR ROSA)
-========================================================= */
+   BOTONES GRANDES DE MATERIALES EN EL INICIO (COLOR ROSA)
+========================================================== */
 
-.catalogo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
+/* 1. Contenedor exclusivo para cuando está el inicio */
 .contenedor-inicio-materiales {
     width: 100%;
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 40px auto;
     text-align: center;
-    padding: 40px 20px;
+    padding: 20px;
     box-sizing: border-box;
+    grid-column: 1 / -1; /* Esto hace que ocupe todo el ancho de la cuadrícula sin romperla */
 }
 
 .titulo-inicio-materiales {
