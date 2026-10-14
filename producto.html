@@ -314,6 +314,7 @@
                     const mini = document.createElement("img");
                     mini.src = url;
                     mini.alt = `Foto ${index + 1}`;
+                    mini.loading = "lazy";
                     mini.classList.add("miniatura");
                     if (index === 0) mini.classList.add("activa");
 
