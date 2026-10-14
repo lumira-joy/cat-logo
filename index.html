@@ -301,7 +301,7 @@
         </button>
 
     </aside>
-
+         
     <!-- =========================================================
          IMAGEN PRINCIPAL
     ========================================================== -->
@@ -511,6 +511,20 @@
             if (sub) sub.classList.remove("activo");
         }
 
+        function filtrarTipoGeneral(tipo) {
+            const url = new URL(window.location);
+            url.searchParams.delete("material");
+            url.searchParams.set("tipo", tipo);
+            window.history.pushState({}, "", url);
+
+            const productosFiltrados = todosLosProductos.filter(producto => {
+                const tip = (producto.tipo || "").toLowerCase();
+                return tip === tipo.toLowerCase();
+            });
+
+            mostrarProductos(productosFiltrados);
+        }
+        
 // Leer la URL al cargar o al usar atrás/adelante del navegador
         function aplicarFiltrosDesdeURL() {
             const params = new URLSearchParams(window.location.search);
