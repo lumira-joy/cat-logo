@@ -632,8 +632,9 @@
                     .from("productos")
                     .upload(nombreArchivo, archivo, {
                         contentType: archivo.type,
+                        cacheControl: '2592000', // (Caché por 30 días)
                         upsert: false
-                    });
+                   });
 
                 if (error) {
                     console.error("Error subiendo imagen:", error);
