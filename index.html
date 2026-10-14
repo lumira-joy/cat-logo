@@ -523,6 +523,43 @@
                 mostrarProductos(todosLosProductos);
             }
         }
+        // NUEVA FUNCIÓN: Muestra los botones de materiales en la página principal
+        function mostrarInicioCategorias() {
+            const catalogo = document.getElementById("catalogo");
+            catalogo.innerHTML = `
+                <div class="contenedor-inicio-materiales">
+                    <h2 class="titulo-inicio-materiales">Elegí el material que estás buscando</h2>
+                    <div class="grid-materiales-grandes">
+                        <button class="btn-material-grande" onclick="filtrarMaterial('acero-blanco')">Acero Blanco</button>
+                        <button class="btn-material-grande" onclick="filtrarMaterial('acero-dorado')">Acero Dorado</button>
+                        <button class="btn-material-grande" onclick="filtrarMaterial('acero-quirurgico')">Acero Quirúrgico</button>
+                        <button class="btn-material-grande" onclick="filtrarMaterial('plata')">Plata</button>
+                        <button class="btn-material-grande" onclick="filtrarMaterial('laminado-plata')">Laminado en Plata</button>
+                        <button class="btn-material-grande btn-ver-todo-general" onclick="mostrarProductos(todosLosProductos)">Ver todo el catálogo</button>
+                    </div>
+                </div>
+            `;
+            
+            const sub = document.getElementById("submenu-productos");
+            if (sub) sub.classList.remove("activo");
+        }
+
+        // Modificar para que el botón "Inicio" del menú cargue los botones grandes
+        function mostrarSeccion(seccion, actualizarURL = true) {
+            if (actualizarURL) {
+                const url = new URL(window.location);
+                url.searchParams.delete("material");
+                url.searchParams.delete("tipo");
+                window.history.pushState({}, "", url);
+            }
+
+            if (seccion === 'todos') {
+                mostrarInicioCategorias();
+            }
+
+            const sub = document.getElementById("submenu-productos");
+            if (sub) sub.classList.remove("activo");
+        }
 
         window.addEventListener("popstate", aplicarFiltrosDesdeURL);
 
