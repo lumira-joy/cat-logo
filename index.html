@@ -509,7 +509,7 @@
             if (sub) sub.classList.remove("activo");
         }
 
-        // Leer la URL al cargar o al usar atrás/adelante del navegador
+// Leer la URL al cargar o al usar atrás/adelante del navegador
         function aplicarFiltrosDesdeURL() {
             const params = new URLSearchParams(window.location.search);
             const material = params.get("material");
@@ -520,10 +520,12 @@
             } else if (material) {
                 filtrarMaterial(material, false);
             } else {
-                mostrarProductos(todosLosProductos);
+                // Si no hay filtros, mostramos los botones grandes de inicio
+                mostrarInicioCategorias();
             }
         }
-        // NUEVA FUNCIÓN: Muestra los botones de materiales en la página principal
+
+        // FUNCIÓN: Muestra los botones gigantes de materiales en el inicio
         function mostrarInicioCategorias() {
             const catalogo = document.getElementById("catalogo");
             catalogo.innerHTML = `
@@ -757,12 +759,19 @@
         }
 
         /* ========================================================
-           INICIALIZAR
+            INICIALIZAR
         ======================================================== */
         cargarCarritoGuardado();
         actualizarCarrito();
-        cargarProductos();
-
+        
+        // Modificamos esto para que cargue los datos en segundo plano 
+        // pero muestre los botones grandes apenas abre la página:
+        async function iniciarTienda() {
+            mostrarInicioCategorias(); // Muestra los botones al instante
+            await cargarProductos();   // Carga los productos por detrás sin mostrarlos todavía
+        }
+        
+        iniciarTienda();
     </script>
 </body>
 </html>
