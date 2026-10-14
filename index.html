@@ -555,6 +555,7 @@
                 const imagen = document.createElement("img");
                 imagen.src = producto.imagen || "images/sin-imagen.jpg";
                 imagen.alt = producto.nombre || "Joya Lumira";
+                imagen.loading = "lazy";
 
                 // 2. Nombre
                 const nombre = document.createElement("h2");
