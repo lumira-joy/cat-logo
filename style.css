@@ -958,3 +958,73 @@ body {
     background-color: #b33434;
     color: #ffffff;
 }
+/* =========================================================
+   BOTONES GRANDES DE MATERIALES EN EL INICIO (CENTRADOS)
+========================================================== */
+.catalogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-inicio-materiales {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.titulo-inicio-materiales {
+    font-size: 26px;
+    margin-bottom: 35px;
+    color: #333;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.grid-materiales-grandes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-material-grande {
+    flex: 1 1 280px;
+    max-width: 400px;
+    padding: 30px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    color: #333;
+    border: 2px solid #eaeaea;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+
+.btn-material-grande:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+    border-color: #d65a73;
+    color: #d65a73;
+}
+
+.btn-ver-todo-general {
+    background-color: #d65a73;
+    color: #ffffff;
+    border: none;
+    flex: 1 1 100%;
+    max-width: 400px;
+    margin-top: 10px;
+}
+
+.btn-ver-todo-general:hover {
+    background-color: #b33434;
+    color: #ffffff;
+}
