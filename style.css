@@ -477,7 +477,7 @@ body {
 
 /* =========================================================
    IMAGEN PRINCIPAL
-========================================================== */
+========================================================= */
 
 .menu-imagen {
     width: 100%;
@@ -485,14 +485,13 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #fff; /* Color de fondo por si la imagen no llena todo el ancho exacto */
 }
 
 .menu-imagen .fondo {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* 👈 CAMBIAMOS ESTO DE "cover" A "contain" PARA QUE SE VEA COMPLETA */
+    object-fit: cover;
     object-position: center center;
 }
 
