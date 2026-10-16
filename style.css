@@ -956,7 +956,7 @@ body {
     color: #3d232c;
 }
 /* =========================================================
-   SECCIÓN DE NOVEDADES (INICIO)
+   SECCIÓN DE NOVEDADES (CARRUSEL)
 ========================================================== */
 
 .seccion-novedades {
@@ -964,7 +964,8 @@ body {
     max-width: 1200px;
     margin: 10px auto 40px auto;
     padding: 0 15px;
-    grid-column: 1 / -1; /* Ocupa todo el ancho de la grilla */
+    grid-column: 1 / -1;
+    position: relative; /* Necesario para posicionar las flechas */
 }
 
 .titulo-novedades {
@@ -987,64 +988,130 @@ body {
     border-radius: 2px;
 }
 
-.grid-novedades {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+/* Contenedor principal del carrusel */
+.carrusel-contenedor {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
+/* El track que contiene todas las tarjetas (se desliza) */
+.carrusel-track {
+    display: flex;
+    overflow-x: auto;  /* Habilita el scroll horizontal */
+    scroll-behavior: smooth; /* Hace que el desplazamiento sea suave */
+    gap: 20px; /* Espacio entre tarjetas */
+    padding: 10px 5px; /* Un poco de padding para la sombra */
+    width: 100%;
+    scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+    -ms-overflow-style: none;  /* Oculta la barra de desplazamiento en IE/Edge */
+}
+
+/* Oculta la barra de desplazamiento en Chrome/Safari/Opera */
+.carrusel-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* Estilo base de cada tarjeta */
 .tarjeta-novedad {
+    flex: 0 0 auto; /* Impide que las tarjetas se encojan */
+    width: 250px; /* Ancho fijo para cada tarjeta (aprox 4 entran en 1200px) */
     background: rgba(255, 255, 255, 0.95);
     border-radius: 14px;
     padding: 12px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 5px; /* Espacio para el efecto hover */
 }
 
 .tarjeta-novedad:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
 }
 
 .tarjeta-novedad img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1; /* Mantiene la imagen cuadrada */
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
+    pointer-events: none; /* Evita arrastrar la imagen en lugar de hacer clic */
 }
 
 .tarjeta-novedad h3 {
-    font-size: 15px;
+    font-size: 16px;
     color: #333;
     margin: 5px 0;
     font-weight: bold;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; /* Puntos suspensivos si el nombre es muy largo */
 }
 
 .tarjeta-novedad p {
-    font-size: 16px;
+    font-size: 18px;
     color: #b03a58;
     font-weight: bold;
     margin: 0;
 }
 
-/* Responsivo para celulares (muestra en 2 columnas en lugar de 4) */
+/* ESTILOS DE LAS FLECHAS */
+.carrusel-flecha {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.85);
+    color: #4a2e38;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.carrusel-flecha:hover {
+    background-color: white;
+    transform: translateY(-50%) scale(1.05);
+}
+
+.flecha-izquierda {
+    left: -25px; /* Posiciona la flecha fuera del contenedor a la izquierda */
+}
+
+.flecha-derecha {
+    right: -25px; /* Posiciona la flecha fuera del contenedor a la derecha */
+}
+
+/* RESPONSIVO PARA CELULARES */
 @media (max-width: 768px) {
-    .grid-novedades {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-    
     .titulo-novedades {
         font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .tarjeta-novedad {
+        width: 180px; /* Tarjetas más chicas en celular para que se vea una y media */
+    }
+
+    .carrusel-flecha {
+        display: none; /* Opcional: ocultar flechas en celu, el usuario desliza con el dedo */
+    }
+    
+    .carrusel-track {
+        gap: 15px;
     }
 }

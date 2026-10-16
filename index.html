@@ -549,21 +549,20 @@
             }
         }
 
-// FUNCIÓN: Muestra los botones gigantes de materiales en el inicio
+// FUNCIÓN: Muestra la sección de Novedades (carrusel) y los botones de materiales
         function mostrarInicioCategorias() {
             const catalogo = document.getElementById("catalogo");
-            // Filtramos solo los productos que tienen la novedad marcada en true
-            const novedades = todosLosProductos.filter(producto => producto.novedad === true).slice(0, 4);
+            
+            // Filtramos todos los productos que tienen la novedad marcada en true
+            const todasLasNovedades = todosLosProductos.filter(producto => producto.novedad === true);
 
             let htmlNovedades = '';
             
-            if (novedades.length > 0) {
+            if (todasLasNovedades.length > 0) {
                 let tarjetasNovedades = '';
-                novedades.forEach(producto => {
+                todasLasNovedades.forEach(producto => {
                     const precioOriginal = Number(producto.precio || 0);
                     const descuento = Number(producto.descuento || 0);
-                    
-                    // Fórmula corregida y segura para el cálculo del descuento
                     const precioFinal = descuento > 0 ? precioOriginal * (1 - descuento / 100) : precioOriginal;
 
                     tarjetasNovedades += `
@@ -575,17 +574,22 @@
                     `;
                 });
 
+                // Estructura del carrusel con flechas
                 htmlNovedades = `
                     <div class="seccion-novedades">
                         <h2 class="titulo-novedades">Novedades</h2>
-                        <div class="grid-novedades">
-                            ${tarjetasNovedades}
+                        <div class="carrusel-contenedor">
+                            <button class="carrusel-flecha flecha-izquierda" onclick="desplazarCarrusel('izquierda')" aria-label="Anterior">❮</button>
+                            <div class="carrusel-track" id="track-novedades">
+                                ${tarjetasNovedades}
+                            </div>
+                            <button class="carrusel-flecha flecha-derecha" onclick="desplazarCarrusel('derecha')" aria-label="Siguiente">❯</button>
                         </div>
                     </div>
                 `;
             }      
 
-            // Incluimos ${htmlNovedades} antes de los botones de materiales
+            // Ensamblamos el inicio
             catalogo.innerHTML = `
                 ${htmlNovedades}
                 <div class="contenedor-inicio-materiales">
@@ -596,12 +600,33 @@
                         <button class="btn-material-grande" onclick="filtrarMaterial('acero-quirurgico')">Acero Quirúrgico</button>
                         <button class="btn-material-grande" onclick="filtrarMaterial('plata')">Plata</button>
                         <button class="btn-material-grande" onclick="filtrarMaterial('laminado-plata')">Laminado en Plata</button>
+                        <button class="btn-material-grande" onclick="filtrarTipoGeneral('aros-basicos')">Aros Básicos</button>
                     </div>
                 </div>
             `;
             
             const sub = document.getElementById("submenu-productos");
             if (sub) sub.classList.remove("activo");
+        }
+
+        // FUNCIÓN JAVASCRIPT PARA DESPLAZAR EL CARRUSEL
+        function desplazarCarrusel(direccion) {
+            const track = document.getElementById("track-novedades");
+            if (!track) return;
+
+            // Calculamos cuánto mide una tarjeta + el gap (aprox)
+            const tarjeta = track.querySelector('.tarjeta-novedad');
+            if (!tarjeta) return;
+            
+            const anchoTarjeta = tarjeta.offsetWidth + 20; // 20 es el gap definido en CSS
+            const cantidadVisibles = Math.floor(track.parentElement.offsetWidth / anchoTarjeta);
+            const scrollAmount = anchoTarjeta * Math.max(1, cantidadVisibles); // Desplaza por página
+
+            if (direccion === 'izquierda') {
+                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
         }
 
         // Modificar para que el botón "Inicio" del menú cargue los botones grandes
