@@ -143,6 +143,12 @@
                     >
                 </div>
 
+                <!-- NOVEDAD -->
+                <div class="campo" style="flex-direction: row; align-items: center; gap: 10px;">
+                     <input type="checkbox" id="novedad" style="width: 20px; height: 20px; cursor: pointer;">
+                     <label for="novedad" style="margin-bottom: 0; cursor: pointer;">Destacar como Novedad en el inicio</label>
+                </div>
+
                 <!-- PRECIO + DESCUENTO -->
                 <div class="fila-campos">
                     <div class="campo">
@@ -675,6 +681,7 @@
             document.getElementById("tipo").value = producto.tipo || "";
             document.getElementById("cantidad_disponible").value = producto.cantidad_disponible ?? producto.stock ?? 1;
             document.getElementById("descripcion").value = producto.descripcion || "";
+            document.getElementById("novedad").checked = producto.novedad || false;
 
             inputImagenActual.value = producto.imagen || "";
 
@@ -756,7 +763,7 @@
                     urlPortada = fotosSubidas[0].publicUrl;
                 }
 
-                const datosProducto = {
+const datosProducto = {
                     nombre: nombre,
                     precio: precio,
                     categoria: categoria,
@@ -766,7 +773,8 @@
                     imagen: urlPortada,
                     descuento: descuento,
                     cantidad_disponible: cantidadDisponible,
-                    disponible: cantidadDisponible > 0
+                    disponible: cantidadDisponible > 0, // 👈 ¡Acá faltaba la coma!
+                    novedad: document.getElementById("novedad").checked
                 };
 
                 let idProductoFinal = inputId.value;

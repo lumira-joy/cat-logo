@@ -955,3 +955,96 @@ body {
     border-color: #d65a73;
     color: #3d232c;
 }
+/* =========================================================
+   SECCIÓN DE NOVEDADES (INICIO)
+========================================================== */
+
+.seccion-novedades {
+    width: 100%;
+    max-width: 1200px;
+    margin: 10px auto 40px auto;
+    padding: 0 15px;
+    grid-column: 1 / -1; /* Ocupa todo el ancho de la grilla */
+}
+
+.titulo-novedades {
+    font-family: 'MUENOO', cursive;
+    font-size: 34px;
+    text-align: center;
+    color: #4a2e38;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.titulo-novedades::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background-color: #d65a73;
+    margin: 8px auto 0 auto;
+    border-radius: 2px;
+}
+
+.grid-novedades {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.tarjeta-novedad {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 14px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tarjeta-novedad:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+}
+
+.tarjeta-novedad img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.tarjeta-novedad h3 {
+    font-size: 15px;
+    color: #333;
+    margin: 5px 0;
+    font-weight: bold;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tarjeta-novedad p {
+    font-size: 16px;
+    color: #b03a58;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Responsivo para celulares (muestra en 2 columnas en lugar de 4) */
+@media (max-width: 768px) {
+    .grid-novedades {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .titulo-novedades {
+        font-size: 28px;
+    }
+}

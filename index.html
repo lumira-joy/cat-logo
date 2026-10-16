@@ -549,10 +549,45 @@
             }
         }
 
-        // FUNCIÓN: Muestra los botones gigantes de materiales en el inicio
+// FUNCIÓN: Muestra los botones gigantes de materiales en el inicio
         function mostrarInicioCategorias() {
             const catalogo = document.getElementById("catalogo");
+            // Filtramos solo los productos que tienen la novedad marcada en true
+            const novedades = todosLosProductos.filter(producto => producto.novedad === true).slice(0, 4);
+
+            let htmlNovedades = '';
+            
+            if (novedades.length > 0) {
+                let tarjetasNovedades = '';
+                novedades.forEach(producto => {
+                    const precioOriginal = Number(producto.precio || 0);
+                    const descuento = Number(producto.descuento || 0);
+                    
+                    // Fórmula corregida y segura para el cálculo del descuento
+                    const precioFinal = descuento > 0 ? precioOriginal * (1 - descuento / 100) : precioOriginal;
+
+                    tarjetasNovedades += `
+                        <div class="tarjeta-novedad" onclick="window.location.href='producto.html?id=${producto.id}'">
+                            <img src="${producto.imagen || 'images/sin-imagen.jpg'}" alt="${producto.nombre || ''}" loading="lazy">
+                            <h3>${producto.nombre || 'Sin nombre'}</h3>
+                            <p>$${precioFinal.toLocaleString("es-AR")}</p>
+                        </div>
+                    `;
+                });
+
+                htmlNovedades = `
+                    <div class="seccion-novedades">
+                        <h2 class="titulo-novedades">Novedades</h2>
+                        <div class="grid-novedades">
+                            ${tarjetasNovedades}
+                        </div>
+                    </div>
+                `;
+            }      
+
+            // Incluimos ${htmlNovedades} antes de los botones de materiales
             catalogo.innerHTML = `
+                ${htmlNovedades}
                 <div class="contenedor-inicio-materiales">
                     <h2 class="titulo-inicio-materiales">Elegí el material que estás buscando</h2>
                     <div class="grid-materiales-grandes">
